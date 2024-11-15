@@ -1,5 +1,6 @@
-// API URL
+// API URL https://openfoodfacts.github.io/openfoodfacts-server/api/
 const url = 'https://world.openfoodfacts.net/api/v2/product/{4003586105134}'
+// https://world.openfoodfacts.net/api/v2/product/3017624010701?fields=product_name,nutriscore_data
 
 // Fetch data from Open Food Facts API
 fetch(url)
