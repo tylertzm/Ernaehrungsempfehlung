@@ -5,8 +5,8 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"data@workspace:.":
+"veganfood@workspace:.":
   version: 0.0.0-use.local
-  resolution: "data@workspace:."
+  resolution: "veganfood@workspace:."
   languageName: unknown
   linkType: soft
