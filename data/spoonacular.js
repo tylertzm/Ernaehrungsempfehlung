@@ -1,1 +1,0 @@
-// help with spoonacular installation https://github.com/ddsky/spoonacular-api-clients/tree/master/javascript#installation

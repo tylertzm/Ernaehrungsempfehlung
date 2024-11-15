@@ -1,0 +1,8 @@
+{
+  "name": "data",
+  "packageManager": "yarn@4.4.1",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Running tests!\" && exit 0"
+  }
+}
