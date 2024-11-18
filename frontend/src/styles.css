@@ -1,0 +1,12 @@
+.layout {
+    color: rgb(0, 0, 0);             /* Text color */
+    background-color: blue;   /* Background color */
+    font-size: 20px;          /* Font size */
+    padding: 10px;            /* Inner spacing */
+    border: 2px solid black;  /* Border around the element */
+    text-align: center;       /* Center-align text */
+}
+
+body{
+    color: black;
+}
