@@ -9,7 +9,7 @@ const RootRoutes = () => (
   <Router>
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="../Pages/LoginPage/LoginPage" element={<LoginPage />} />
     </Routes>
   </Router>
 );

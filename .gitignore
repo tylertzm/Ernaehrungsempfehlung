@@ -20,3 +20,4 @@ maps-data
 .firebase
 build
 .yarn
+node_modules
