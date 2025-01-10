@@ -14,11 +14,10 @@ import {
   Person4 as ProfileIcon,
 } from '@mui/icons-material';
 import AppLogo from '/Users/tyler/Documents/Personal/Ernaehrungsapp/Ernaehrungsempfehlung/src/react/assets/favicon.svg';
-import { Link } from 'react-router-dom';
 
 const borderRadius = 6;
 
-const LandingPage = () => (
+const TrackingPage = () => (
   <Stack
     direction="row"
     justifyContent="center"
@@ -87,14 +86,9 @@ const LandingPage = () => (
             justifyContent="center"
             alignItems="center"
           >
-            <Typography variant="h3">
-              <Link to="/login">
-                <Button>Login</Button>
-              </Link>
-              <Link to="/register">
-                <Button>Register</Button>
-              </Link>
-            </Typography>
+          <Typography variant="h3" align="center" sx={{ mb: 2 }}>
+            Tracking your progress...
+          </Typography>
           </Stack>
           <BottomNavigation
             showLabels
@@ -126,4 +120,4 @@ const LandingPage = () => (
   </Stack>
 );
 
-export default LandingPage
+export default TrackingPage

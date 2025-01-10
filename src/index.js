@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AppLayout from './react/AppLayout'; // Import App
+import AppLayout from './react/AppLayout';
 
 const container = document.getElementById('app');
 const root = ReactDOM.createRoot(container);
@@ -10,3 +10,5 @@ root.render(
     <AppLayout />
   </React.StrictMode>
 );
+
+

@@ -13,12 +13,11 @@ import {
   Timeline as TimelineIcon,
   Person4 as ProfileIcon,
 } from '@mui/icons-material';
-import AppLogo from '/Users/tyler/Documents/Personal/Ernaehrungsapp/Ernaehrungsempfehlung/src/react/assets/favicon.svg';
-import { Link } from 'react-router-dom';
+import AppLogo from '/Users/tyler/Documents/Personal/Ernaehrungsapp/Ernaehrungsempfehlung/src/react/assets/favicon.svg'
 
 const borderRadius = 6;
 
-const LandingPage = () => (
+const Error404 = () => (
   <Stack
     direction="row"
     justifyContent="center"
@@ -88,13 +87,8 @@ const LandingPage = () => (
             alignItems="center"
           >
             <Typography variant="h3">
-              <Link to="/login">
-                <Button>Login</Button>
-              </Link>
-              <Link to="/register">
-                <Button>Register</Button>
-              </Link>
-            </Typography>
+              <Button href="/LandingPage">Home</Button>
+´            </Typography>
           </Stack>
           <BottomNavigation
             showLabels
@@ -111,9 +105,8 @@ const LandingPage = () => (
               href="/"
             />
             <BottomNavigationAction
-              label="Tracking"
+              label="Timeline"
               icon={<TimelineIcon />}
-              href="/tracking"
             />
             <BottomNavigationAction
               label="Profile"
@@ -126,4 +119,4 @@ const LandingPage = () => (
   </Stack>
 );
 
-export default LandingPage
+export default Error404
