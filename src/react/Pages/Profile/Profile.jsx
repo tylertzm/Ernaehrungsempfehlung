@@ -1,38 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Stack,
   Typography,
   Container,
   Paper,
+  BottomNavigation,
+  BottomNavigationAction,
   Button,
-  TextField,
-  Snackbar,
-} from '@mui/material'; // Removed BottomNavigation and BottomNavigationAction imports as they are not used
-import { Link } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import auth from '../../Hooks/firebase';
+} from '@mui/material';
+import {
+  Home as HomeIcon,
+  Timeline as TimelineIcon,
+  Person4 as ProfileIcon,
+} from '@mui/icons-material';
 import AppLogo from '../../assets/favicon.svg';
+import { Link } from 'react-router-dom';
+import auth from '../../Hooks/firebase'; // Import your firebase auth
 
 const borderRadius = 6;
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  const handleLogin = async () => {
+const ProfilePage = ({ userEmail }) => {
+  const handleSignOut = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Redirect or perform additional actions on successful login
-    } catch (err) {
-      setError(err.message);
-      setOpenSnackbar(true);
+      await auth.signOut(); // Reset the firebase auth
+      window.location.href = '/'; // Redirect to home
+    } catch (error) {
+      console.error("Sign out error", error);
     }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
   };
 
   return (
@@ -66,7 +60,7 @@ const LoginPage = () => {
         >
           <img
             src={AppLogo}
-            alt="App Logo"
+            alt="Snaptrack Logo"
             style={{
               width: '40px',
               height: '40px',
@@ -104,42 +98,50 @@ const LoginPage = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Typography variant="h3">Login</Typography>
-              <TextField
-                label="Email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              <TextField
-                label="Password"
-                type="password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              <Button variant="contained" component={Link} to="/home" onClick={handleLogin} sx={{ mt: 2 }}>
-                Sign In
-              </Button>
-              <Typography variant="body2" sx={{ mt: 2 }}>
-                Don't have an account? <Link to="/register">Register</Link>
+              <Typography variant="h3">
+                Profile
               </Typography>
+              <Typography variant="h6">
+                Email: {userEmail}
+              </Typography>
+              <Button 
+                variant="contained" 
+                onClick={handleSignOut} 
+                sx={{ mt: 2 }}
+              >
+                Sign Out
+              </Button>
             </Stack>
+            <BottomNavigation
+              showLabels
+              value={0}
+              sx={{
+                width: '100%',
+                position: 'sticky',
+                bottom: 0,
+              }}
+            >
+              <BottomNavigationAction
+                label="Home"
+                icon={<HomeIcon />}
+                href="/home"
+              />
+              <BottomNavigationAction
+                label="Timeline"
+                icon={<TimelineIcon />}
+                href="/tracking"
+              />
+              <BottomNavigationAction
+                label="Profile"
+                icon={<ProfileIcon />}
+                href="/profile"
+              />
+            </BottomNavigation>
           </Stack>
         </Paper>
       </Container>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message={error}
-      />
     </Stack>
   );
 };
 
-export default LoginPage;
+export default ProfilePage;

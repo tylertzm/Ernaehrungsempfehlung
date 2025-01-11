@@ -107,10 +107,12 @@ const Error404 = () => (
             <BottomNavigationAction
               label="Timeline"
               icon={<TimelineIcon />}
+              href="/tracking"
             />
             <BottomNavigationAction
               label="Profile"
               icon={<ProfileIcon />}
+              href="/profile"
             />
           </BottomNavigation>
         </Stack>

@@ -150,15 +150,8 @@ const RegisterPage = () => {
                 icon={<HomeIcon />}
                 href="/"
               />
-              <BottomNavigationAction
-                label="Tracking"
-                icon={<TimelineIcon />}
-                href="/tracking"
-              />
-              <BottomNavigationAction
-                label="Profile"
-                icon={<ProfileIcon />}
-              />
+
+              
             </BottomNavigation>
           </Stack>
         </Paper>

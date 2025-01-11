@@ -6,7 +6,6 @@ import {
   Paper,
   BottomNavigation,
   BottomNavigationAction,
-  Button,
 } from '@mui/material';
 import {
   Home as HomeIcon,
@@ -14,10 +13,11 @@ import {
   Person4 as ProfileIcon,
 } from '@mui/icons-material';
 import AppLogo from '../../assets/favicon.svg';
+import { Link } from 'react-router-dom';
 
 const borderRadius = 6;
 
-const TrackingPage = () => (
+const TrackingPage = ({ userEmail }) => (
   <Stack
     direction="row"
     justifyContent="center"
@@ -36,8 +36,8 @@ const TrackingPage = () => (
         flexDirection: 'column',
         width: '100%',
         height: '100%',
-        maxWidth: '480px', // Ensures it doesn’t look overly large on larger screens
-        margin: '0 auto', // Centers the container for larger screens
+        maxWidth: '480px',
+        margin: '0 auto',
       }}
     >
       <Stack
@@ -48,7 +48,7 @@ const TrackingPage = () => (
       >
         <img
           src={AppLogo}
-          alt="App Logo"
+          alt="Snaptrack Logo"
           style={{
             width: '40px',
             height: '40px',
@@ -86,9 +86,42 @@ const TrackingPage = () => (
             justifyContent="center"
             alignItems="center"
           >
-          <Typography variant="h3" align="center" sx={{ mb: 2 }}>
-            Tracking your progress...
-          </Typography>
+            <Typography variant="h3">
+              Tracking History
+            </Typography>
+
+            <Link to="/tracking/upload" style={{ textDecoration: 'none' }}>
+              <button
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#1976d2',
+                  color: 'white',
+                  border: 'none',
+                  cursor: 'pointer',
+                  borderRadius: '4px',
+                }}
+              >
+                Upload Image
+              </button>
+            </Link>
+          </Stack>
+          <Stack
+            flex="1 1 auto"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ marginTop: 2 }}
+          >
+            <Typography variant="h6">Gallery</Typography>
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{ flexWrap: 'wrap', justifyContent: 'center', marginTop: 1 }}
+            >
+              {/* Example empty gallery items */}
+              <Paper sx={{ width: 100, height: 100, backgroundColor: 'grey.300' }} />
+              <Paper sx={{ width: 100, height: 100, backgroundColor: 'grey.300' }} />
+              <Paper sx={{ width: 100, height: 100, backgroundColor: 'grey.300' }} />
+            </Stack>
           </Stack>
           <BottomNavigation
             showLabels
@@ -102,16 +135,17 @@ const TrackingPage = () => (
             <BottomNavigationAction
               label="Home"
               icon={<HomeIcon />}
-              href="/"
+              href="/home"
             />
             <BottomNavigationAction
-              label="Tracking"
+              label="Timeline"
               icon={<TimelineIcon />}
               href="/tracking"
             />
             <BottomNavigationAction
               label="Profile"
               icon={<ProfileIcon />}
+              href="/profile"
             />
           </BottomNavigation>
         </Stack>

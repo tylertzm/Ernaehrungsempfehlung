@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+import React, { useEffect, useState } from 'react'; // Added useState and useEffect
+import { createRoot } from 'react-dom/client';
 
-import { CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material';
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "./Hooks/firebase"; // Import the configured auth instance
 
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import AppLayout from './AppLayout'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AppLayout from './AppLayout';
 
 const theme = createTheme({
   components: {
@@ -27,14 +29,6 @@ const theme = createTheme({
       })
     }
   }
-})
+});
 
-const container = document.getElementById('app')
-const root = createRoot(container)
-root.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <AppLayout />
-  </ThemeProvider>
-)
-
+export default App;
