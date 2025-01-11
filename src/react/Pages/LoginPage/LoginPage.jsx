@@ -127,8 +127,8 @@ const LoginPage = () => {
                 fullWidth
                 margin="normal"
               />
-              <Button variant="contained" onClick={handleLogin} sx={{ mt: 2 }}>
-                Login
+              <Button variant="contained" component={Link} to="/home" onClick={handleLogin} sx={{ mt: 2 }}>
+                Sign In
               </Button>
               <Typography variant="body2" sx={{ mt: 2 }}>
                 Don't have an account? <Link to="/register">Register</Link>
