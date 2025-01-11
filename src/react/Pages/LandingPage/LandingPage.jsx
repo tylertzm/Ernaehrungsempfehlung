@@ -13,7 +13,7 @@ import {
   Timeline as TimelineIcon,
   Person4 as ProfileIcon,
 } from '@mui/icons-material';
-import AppLogo from '/Users/tyler/Documents/Personal/Ernaehrungsapp/Ernaehrungsempfehlung/src/react/assets/favicon.svg';
+import AppLogo from '../../assets/favicon.svg';
 import { Link } from 'react-router-dom';
 
 const borderRadius = 6;

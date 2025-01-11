@@ -13,7 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth'; // Changed to createUserWithEmailAndPassword
 import auth from '../../Hooks/firebase';
-import AppLogo from '/Users/tyler/Documents/Personal/Ernaehrungsapp/Ernaehrungsempfehlung/src/react/assets/favicon.svg';
+import AppLogo from '../../assets/favicon.svg';
 import HomeIcon from '@mui/icons-material/Home';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import ProfileIcon from '@mui/icons-material/Person';

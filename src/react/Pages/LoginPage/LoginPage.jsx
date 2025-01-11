@@ -13,7 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../Hooks/firebase';
-import AppLogo from '/Users/tyler/Documents/Personal/Ernaehrungsapp/Ernaehrungsempfehlung/src/react/assets/favicon.svg';
+import AppLogo from '../../assets/favicon.svg';
 import HomeIcon from '@mui/icons-material/Home'; // Added HomeIcon import
 import TimelineIcon from '@mui/icons-material/Timeline'; // Added TimelineIcon import
 import ProfileIcon from '@mui/icons-material/Person'; // Added ProfileIcon import

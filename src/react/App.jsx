@@ -5,8 +5,7 @@ import { createRoot } from 'react-dom/client'
 import { CssBaseline } from '@mui/material'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import RootRoutes from './Routes/RootRoutes'
-
+import AppLayout from './AppLayout'
 
 const theme = createTheme({
   components: {
@@ -35,7 +34,7 @@ const root = createRoot(container)
 root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <RootRoutes />
+    <AppLayout />
   </ThemeProvider>
 )
 
