@@ -18,6 +18,7 @@ forge.tmp.json
 forge-bundle
 maps-data
 .firebase
+src/react/Hooks/serviceAccountKey.json
 build
 .yarn
 node_modules

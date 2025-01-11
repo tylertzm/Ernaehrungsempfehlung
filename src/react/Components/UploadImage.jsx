@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const UploadImage = () => {
-  const [imgUrl, setImgUrl] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
 
   const handleUpload = async (e) => {
@@ -11,11 +10,6 @@ const UploadImage = () => {
 
     if (!file) {
       alert("No file selected!");
-      return;
-    }
-
-    if (!file.type.startsWith("image/")) {
-      alert("Please upload an image file.");
       return;
     }
 
@@ -30,10 +24,13 @@ const UploadImage = () => {
         },
       });
 
-      setImgUrl(response.data.url);
-      // Redirect to /tracking/upload using pure JavaScript (no Next.js routing)
-      window.location.href = "/tracking/upload"; // This will redirect after upload
-
+      // Check if the server responded with a success status code (2xx)
+      if (response.status >= 200 && response.status < 300) {
+        // Redirect to /tracking/upload after upload
+        window.location.href = "/tracking/upload";
+      } else {
+        throw new Error("Server responded with an error");
+      }
     } catch (error) {
       console.error("Upload error:", error);
       alert("Failed to upload file.");
@@ -48,7 +45,7 @@ const UploadImage = () => {
       </form>
 
       {progresspercent > 0 && (
-        <div style={{ marginTop: "20px" }}>
+        <div>
           <p>Upload Progress: {progresspercent}%</p>
           <div
             style={{
@@ -56,7 +53,7 @@ const UploadImage = () => {
               backgroundColor: "#f3f3f3",
               borderRadius: "5px",
               overflow: "hidden",
-              marginBottom: "10px",
+              marginTop: "10px",
             }}
           >
             <div
@@ -67,13 +64,6 @@ const UploadImage = () => {
               }}
             ></div>
           </div>
-        </div>
-      )}
-
-      {imgUrl && (
-        <div style={{ marginTop: "20px" }}>
-          <p>Uploaded Image:</p>
-          <img src={imgUrl} alt="Uploaded File" style={{ width: "200px" }} />
         </div>
       )}
     </div>

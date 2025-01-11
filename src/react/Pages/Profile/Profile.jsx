@@ -1,4 +1,5 @@
 import React from 'react';
+import LogoutButton from './SignOut';
 import {
   Stack,
   Typography,
@@ -104,13 +105,7 @@ const ProfilePage = ({ userEmail }) => {
               <Typography variant="h6">
                 Email: {userEmail}
               </Typography>
-              <Button 
-                variant="contained" 
-                onClick={handleSignOut} 
-                sx={{ mt: 2 }}
-              >
-                Sign Out
-              </Button>
+              <LogoutButton></LogoutButton>
             </Stack>
             <BottomNavigation
               showLabels
