@@ -8,23 +8,21 @@ import {
 } from '@mui/material';
 import AppLogo from '../../assets/favicon.svg';
 import { Link } from 'react-router-dom';
-import auth from '../../Hooks/firebase';
+
 const borderRadius = 6;
 
-
 const LandingPage = () => {
-  const { user } = auth; // Get user state from custom hook
-
   return (
     <Stack
       direction="row"
       justifyContent="center"
+      alignItems="center"
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        padding: (theme) => theme.spacing(2),
         overflow: 'hidden',
+        backgroundColor: (theme) => theme.palette.grey[100], // Set a light background color
       }}
     >
       <Container
@@ -38,7 +36,6 @@ const LandingPage = () => {
           margin: '0 auto',
         }}
       >
-
         <Paper
           elevation={6}
           sx={{
@@ -47,36 +44,64 @@ const LandingPage = () => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            borderRadius: (theme) => theme.spacing(borderRadius),
+            background: (theme) => theme.palette.grey[900], // Dark background for paper
           }}
         >
+          {/* Logo Section */}
           <Stack
-            flex="1 1 auto"
             direction="column"
             justifyContent="center"
             alignItems="center"
+            spacing={2}
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
+              padding: (theme) => theme.spacing(3),
+              background: (theme) => theme.palette.background.paper,
+              borderRadius: (theme) => theme.spacing(borderRadius),
             }}
           >
-        
-        <img
-          src={AppLogo}
-          alt="App Logo"
-          style={{
-            width: '400px', // Adjusted for responsive size
-            height: 'auto',  // Maintain aspect ratio
-          }}
-        />
-              <>
-                <Button variant="contained" component={Link} to="/home">Login</Button>
-                <br />
-                <Button variant="contained" component={Link} to="/register">Register</Button>
-              </>
+            <img
+              src={AppLogo}
+              alt="App Logo"
+              style={{
+                width: '200px', // Adjusted for responsive size
+                height: 'auto', // Maintain aspect ratio
+              }}
+            />
+            <Typography variant="h4" textAlign="center">
+              Snaptrack
+            </Typography>
+          </Stack>
 
+          {/* Buttons Section */}
+          <Stack
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+            sx={{ marginTop: 3 }}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ maxWidth: '200px' }}
+              component={Link}
+              to="/login"
+            >
+              Login
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              sx={{ maxWidth: '200px' }}
+              component={Link}
+              to="/register"
+            >
+              Register
+            </Button>
           </Stack>
         </Paper>
       </Container>
@@ -84,4 +109,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage
+export default LandingPage;

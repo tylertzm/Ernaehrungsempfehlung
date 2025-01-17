@@ -1,39 +1,41 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
+// Importiere die benötigten Funktionen aus Firebase
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth";
-import { getStorage } from 'firebase/storage';
+import { getStorage } from 'firebase/storage'; // Für Firebase Storage hinzugefügt
+import { getFirestore } from 'firebase/firestore'; // Optional: Firestore für Datenbank, falls benötigt
 
-import { getFirestore } from 'firebase/firestore';
-// TODO: Add SDKs for Firebase products that you want to use
+// TODO: Add SDKs for Firebase products that du verwenden möchtest
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase-Konfiguration
 const firebaseConfig = {
   apiKey: 'AIzaSyA253jVEP-57TL6ZIdgUk7k92m7IgUmXaE',
   authDomain: 'snaptrack-e5f4e.firebaseapp.com',
   projectId: 'snaptrack-e5f4e',
-  storageBucket: "snaptrack-e5f4e.firebasestorage.app",
+  storageBucket: "snaptrack-e5f4e.appspot.com", // Überprüfen: Standard ist `.appspot.com`
   messagingSenderId: '161907793048',
   appId: '1:161907793048:web:8c1e0155cdbf8e207dc4ed',
-  measurementId: 'G-FBNL51015V'
-}
+  measurementId: 'G-FBNL51015V',
+};
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig)
+// Firebase initialisieren
+const app = initializeApp(firebaseConfig);
 // eslint-disable-next-line no-unused-vars
-const analytics = getAnalytics(app)
-const auth = getAuth(app)
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const storage = getStorage(app); // Firebase Storage initialisiert
+const db = getFirestore(app); // Firestore initialisiert, falls erforderlich
 
-// Set session persistence
+// Session-Persistenz festlegen
 setPersistence(auth, browserSessionPersistence)
   .then(() => {
     console.log("Session persistence set.");
-    // You can now call signIn methods
+    // Du kannst jetzt die signIn-Methoden verwenden
   })
   .catch((error) => {
     console.error("Error setting session persistence:", error);
-  })
+  });
 
-export default auth;
+// Exporte
+export { auth, storage, db }; // Exportiere auth, storage und db für die Verwendung in der App

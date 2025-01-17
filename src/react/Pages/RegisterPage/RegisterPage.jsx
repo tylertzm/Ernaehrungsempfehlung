@@ -10,13 +10,10 @@ import {
   BottomNavigation,
   BottomNavigationAction,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; // Changed to createUserWithEmailAndPassword
-import auth from '../../Hooks/firebase';
 import AppLogo from '../../assets/favicon.svg';
 import HomeIcon from '@mui/icons-material/Home';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import ProfileIcon from '@mui/icons-material/Person';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../Hooks/firebase';
 
 const borderRadius = 6;
 
@@ -26,17 +23,23 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleRegister = async () => { // Renamed to handleRegister
-    if (password.length < 8) { // Added password length validation
-      setError('Password must be at least 8 characters');
+  const handleRegister = async () => {
+    if (!email.includes('@')) {
+      setError('Please enter a valid email address.');
+      setOpenSnackbar(true);
+      return;
+    }
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.');
       setOpenSnackbar(true);
       return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, email, password); // Changed to createUserWithEmailAndPassword
-      // Redirect or perform additional actions on successful registration
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert('Successfully registered!');
+      window.location.href = '/dashboard'; // Redirect to another page
     } catch (err) {
-      setError(err.message);
+      setError('Registration failed: ' + err.message);
       setOpenSnackbar(true);
     }
   };
@@ -52,8 +55,8 @@ const RegisterPage = () => {
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        paddingTop: (theme) => theme.spacing(2),
+        paddingBottom: (theme) => theme.spacing(2),
         overflow: 'hidden',
       }}
     >
@@ -94,8 +97,8 @@ const RegisterPage = () => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            borderRadius: (theme) => theme.spacing(borderRadius),
+            background: (theme) => theme.palette.grey[900],
           }}
         >
           <Stack
@@ -105,60 +108,42 @@ const RegisterPage = () => {
             alignItems="center"
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
+              borderRadius: (theme) => theme.spacing(borderRadius),
+              background: (theme) => theme.palette.background.paper,
             }}
           >
-            <Stack
-              flex="1 1 auto"
-              justifyContent="center"
-              alignItems="center"
+            <Typography variant="h3">Register</Typography>
+            <TextField
+              label="Email Address"
+              variant="outlined"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              fullWidth
+              margin="normal"
+            />
+            <Button
+              variant="contained"
+              onClick={handleRegister}
+              sx={{ mt: 2 }}
+              disabled={!email || password.length < 8}
             >
-              <Typography variant="h3">Register</Typography>
-              <TextField
-                label="Email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              <TextField
-                label="Password must be at least 8 characters"
-                type="password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              <Button variant="contained" onClick={handleRegister} sx={{ mt: 2 }}> {/* Changed to handleRegister */}
-                Register 
-              </Button>
-            </Stack>
-            <BottomNavigation
-              showLabels
-              value={0}
-              sx={{
-                width: '100%',
-                position: 'sticky',
-                bottom: 0,
-              }}
-            >
-              <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon />}
-                href="/"
-              />
-
-              
-            </BottomNavigation>
+              Register
+            </Button>
           </Stack>
         </Paper>
       </Container>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={handleCloseSnackbar}
         message={error}
       />

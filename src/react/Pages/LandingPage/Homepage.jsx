@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import {
   Stack,
   Typography,
@@ -7,201 +7,144 @@ import {
   CardContent,
   BottomNavigation,
   BottomNavigationAction,
-  Fab, // Importing Floating Action Button
-  Link // Importing Link component
+  Fab,
 } from '@mui/material';
 import {
   Home as HomeIcon,
   Timeline as TimelineIcon,
   Person4 as ProfileIcon,
-  ArrowDropDown as ArrowDropDownIcon, // Importing the down arrow icon
-  Add as AddIcon, // Importing the plus icon
-  CloudUpload as UploadIcon,
+  Add as AddIcon,
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom'; // Für Navigation
 import AppLogo from '../../assets/favicon.svg';
 
-
-
-const borderRadius = 6;
-
-const Homepage = ({ userEmail }) => {
-  const galleryItems = [
-    { id: 1, text: 'Post 1' },
-    { id: 2, text: 'Post 2' },
-    { id: 3, text: 'Post 3' }
-  ]; // Updated to include text for each post
-  const scrollContainerRef = useRef(null);
-
-  const handleUploadClick = () => {
-    // Logic to open the FileUpload component can be added here
-    console.log("Upload button clicked");
-  };
+const Homepage = ({ user }) => {
+  const navigate = useNavigate(); // Navigation initialisieren
 
   return (
     <Stack
-      direction="row"
-      justifyContent="center"
+      direction="column"
+      justifyContent="space-between"
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: (theme) => theme.spacing(2),
-        paddingBottom: (theme) => theme.spacing(2),
+        backgroundImage: 'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)', // Schöner Hintergrundverlauf
         overflow: 'hidden',
       }}
     >
+      {/* Header und Hauptinhalt */}
       <Container
         disableGutters
         sx={{
+          flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          maxWidth: '480px',
-          margin: '0 auto',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        {/* App Header */}
+        {/* Header */}
         <Stack
           direction="row"
           justifyContent="center"
           alignItems="center"
-          marginBottom={2}
+          marginBottom={4}
         >
           <img
             src={AppLogo}
             alt="Snaptrack Logo"
             style={{
-              width: '40px',
-              height: '40px',
+              width: '80px', // Kleinere Bildgröße
+              height: 'auto',
             }}
           />
-          <Typography variant="h5" sx={{ ml: 1 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              ml: 1,
+              color: 'white', // Text in Weiß für besseren Kontrast
+              fontWeight: 'bold',
+            }}
+          >
             Snaptrack
           </Typography>
         </Stack>
 
-        {/* Main Content */}
+        {/* Hauptinhalt */}
         <Card
-          elevation={6}
+          elevation={8}
           sx={{
-            flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
-            padding: 2,
-            overflow: 'hidden',
-            borderRadius: (theme) => theme.spacing(borderRadius),
-            background: (theme) => theme.palette.grey[900],
+            padding: 3,
+            borderRadius: 4, // Runde Ecken
+            background: 'white',
+            textAlign: 'center',
+            width: '90%',
+            maxWidth: '400px',
           }}
         >
-          <CardContent
-            sx={{
-              flex: '1 1 auto',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              overflow: 'hidden',
-              borderRadius: (theme) => theme.spacing(borderRadius),
-              background: (theme) => theme.palette.background.paper,
-            }}
-          >
-            <Stack flex="1 1 auto" justifyContent="center" alignItems="center">
-              <Typography variant="h5">
-                Hello, {userEmail || 'Guest'}!
-              </Typography>
-            </Stack>
-
-            {/* New Container for Iron Left Message */}
-            <Container 
-              sx={{ 
-                marginTop: 2, 
-                textAlign: 'center', 
-                border: '3px solid', // Added border
-                padding: 1 // Added padding for better appearance
-              }}
-            >
-              <Typography variant="h4">X g of iron left this week</Typography>
-            </Container>
-            {/* Down Arrow */}
-            <Stack paddingTop={2} direction="row" alignItems="center" spacing={1}>
-              <ArrowDropDownIcon sx={{ fontSize: 40 }} />
-              <Typography variant="h6">Check My Goals</Typography>
-            </Stack>
-
-            {/* Gallery Section */}
-            <Stack
-              flex="1 1 auto"
-              justifyContent="center"
-              alignItems="center"
-              sx={{ 
-                marginTop: 2,
-                width: '100%' // Make sure stack takes full width
-              }}
-            >
-              {/* Gallery */}
-              <Stack
-                spacing={1}
-                sx={{
-                  marginTop: 1,
-                  width: '100%', // Take full width of parent
-                  maxWidth: '100%', // Ensure it doesn't overflow
-                  px: 2 // Add some padding on the sides
-                }}
-              >
-                {galleryItems.map((item) => (
-                  <Card
-                    key={item.id}
-                    sx={{
-                      width: '100%', // Take full width of parent stack
-                      height: 80,
-                      backgroundColor: 'grey.300',
-                      margin: '5px 0',
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <Typography>{item.text}</Typography>
-                  </Card>
-                ))}
-              </Stack>
-            </Stack>
-
-            <Fab size="medium" color="primary" aria-label="add">
-        <Link href="/tracking/upload" passHref style={{ display: 'flex', padding: 0, margin: 0 }}>
-          <AddIcon style={{ color: 'white' }} />
-             </Link>
-            </Fab>
-            {/* Bottom Navigation */}
-            <BottomNavigation
-              showLabels
-              value={0}
+          <CardContent>
+            <Typography
+              variant="h4"
+              gutterBottom
               sx={{
-                width: '100%',
-                position: 'sticky',
-                bottom: 0,
+                color: '#333',
+                fontWeight: 'bold',
               }}
             >
-              <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon />}
-                href="/home"
-              />
-              <BottomNavigationAction
-                label="Timeline"
-                icon={<TimelineIcon />}
-                href="/tracking"
-              />
-              <BottomNavigationAction
-                label="Profile"
-                icon={<ProfileIcon />}
-                href="/profile"
-              />
-            </BottomNavigation>
+              Welcome, {user?.email || 'Guest'}!
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#555' }}>
+              {user
+                ? 'You are successfully logged in! Explore your features below.'
+                : 'Please log in to access your data.'}
+            </Typography>
+
+            {/* Add Button */}
+            {user && (
+              <Fab
+                color="primary"
+                sx={{ mt: 4 }}
+                onClick={() => navigate('/tracking/upload')}
+              >
+                <AddIcon />
+              </Fab>
+            )}
           </CardContent>
         </Card>
       </Container>
+
+      {/* Bottom Navigation */}
+      <BottomNavigation
+        showLabels
+        sx={{
+          width: '100%',
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)', // Transparenter Hintergrund
+        }}
+      >
+        <BottomNavigationAction
+          label="Home"
+          icon={<HomeIcon />}
+          sx={{ color: 'white' }}
+          onClick={() => navigate('/home')}
+        />
+        <BottomNavigationAction
+          label="Timeline"
+          icon={<TimelineIcon />}
+          sx={{ color: 'white' }}
+          onClick={() => navigate('/tracking')}
+        />
+        <BottomNavigationAction
+          label="Profile"
+          icon={<ProfileIcon />}
+          sx={{ color: 'white' }}
+          onClick={() => navigate('/profile')}
+        />
+      </BottomNavigation>
     </Stack>
   );
 };

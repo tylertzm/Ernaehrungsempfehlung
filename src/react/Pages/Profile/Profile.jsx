@@ -16,7 +16,7 @@ import {
 } from '@mui/icons-material';
 import AppLogo from '../../assets/favicon.svg';
 import { Link } from 'react-router-dom';
-import auth from '../../Hooks/firebase'; // Import your firebase auth
+import { auth } from '../../Hooks/firebase'; // Import your firebase auth
 
 const borderRadius = 6;
 

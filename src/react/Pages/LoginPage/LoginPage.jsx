@@ -7,13 +7,11 @@ import {
   Button,
   TextField,
   Snackbar,
-} from '@mui/material'; // Removed BottomNavigation and BottomNavigationAction imports as they are not used
-import { Link } from 'react-router-dom';
+} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom'; // Added navigation logic
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import auth from '../../Hooks/firebase';
+import { auth } from '../../Hooks/firebase';
 import AppLogo from '../../assets/favicon.svg';
-
-const borderRadius = 6;
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -21,12 +19,15 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  const navigate = useNavigate(); // For navigation
+
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Redirect or perform additional actions on successful login
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('Login successful:', userCredential.user);
+      navigate('/home'); // Redirect to the homepage
     } catch (err) {
-      setError(err.message);
+      setError('Login failed: ' + err.message);
       setOpenSnackbar(true);
     }
   };
@@ -42,8 +43,7 @@ const LoginPage = () => {
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        padding: (theme) => theme.spacing(2),
         overflow: 'hidden',
       }}
     >
@@ -52,86 +52,76 @@ const LoginPage = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          maxWidth: '480px',
-          margin: '0 auto',
+          maxWidth: '400px',
+          margin: 'auto',
         }}
       >
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          marginBottom={2}
-        >
-          <img
-            src={AppLogo}
-            alt="App Logo"
-            style={{
-              width: '40px',
-              height: '40px',
-            }}
-          />
+        {/* Logo */}
+        <Stack direction="row" justifyContent="center" alignItems="center" mb={2}>
+          <img src={AppLogo} alt="App Logo" style={{ width: '40px', height: '40px' }} />
           <Typography variant="h5" sx={{ ml: 1 }}>
             Snaptrack
           </Typography>
         </Stack>
+
+        {/* Login Form */}
         <Paper
-          elevation={6}
+          elevation={3}
           sx={{
-            flex: '1 1 auto',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: 2,
-            overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            padding: 3,
+            borderRadius: 3,
           }}
         >
-          <Stack
-            flex="1 1 auto"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-              overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
-            }}
+          <Typography variant="h4" textAlign="center" mb={3}>
+            Login
+          </Typography>
+
+          <TextField
+            label="Email"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ mt: 2 }}
+            onClick={handleLogin}
+            disabled={!email || !password}
           >
-            <Stack
-              flex="1 1 auto"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="h3">Login</Typography>
-              <TextField
-                label="Email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              <TextField
-                label="Password"
-                type="password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              <Button variant="contained" component={Link} to="/home" onClick={handleLogin} sx={{ mt: 2 }}>
-                Sign In
-              </Button>
-              <Typography variant="body2" sx={{ mt: 2 }}>
-                Don't have an account? <Link to="/register">Register</Link>
-              </Typography>
-            </Stack>
-          </Stack>
+            Sign In
+          </Button>
+
+          {/* Back Button */}
+          <Button
+            component={Link}
+            to="/"
+            variant="outlined"
+            fullWidth
+            sx={{ mt: 1 }}
+          >
+            Back to Home
+          </Button>
+
+          <Typography variant="body2" textAlign="center" sx={{ mt: 2 }}>
+            Don't have an account? <Link to="/register">Register</Link>
+          </Typography>
         </Paper>
       </Container>
+
+      {/* Snackbar for Error Messages */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}

@@ -1,5 +1,5 @@
 import React from 'react';
-import  auth  from '../../Hooks/firebase';  // Import auth from firebase.js
+import { auth } from '../../Hooks/firebase';  // Import auth from firebase.js
 import { signOut } from 'firebase/auth';
 import { Button } from '@mui/material';  // Import the Button component from MUI
 
