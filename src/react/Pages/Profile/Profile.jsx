@@ -1,32 +1,30 @@
-import React from 'react';
-import LogoutButton from './SignOut';
+import React from 'react'
+import LogoutButton from './SignOut'
 import {
   Stack,
   Typography,
   Container,
   Paper,
   BottomNavigation,
-  BottomNavigationAction,
-  Button,
-} from '@mui/material';
+  BottomNavigationAction
+} from '@mui/material'
 import {
   Home as HomeIcon,
   Timeline as TimelineIcon,
-  Person4 as ProfileIcon,
-} from '@mui/icons-material';
+  Person4 as ProfileIcon
+} from '@mui/icons-material'
 import AppLogo from '../../assets/favicon.svg';
-import { Link } from 'react-router-dom';
-import auth from '../../Hooks/firebase'; // Import your firebase auth
+import auth from '../../Hooks/firebase' // Import your firebase auth
 
-const borderRadius = 6;
+const borderRadius = 6
 
 const ProfilePage = ({ userEmail }) => {
   const handleSignOut = async () => {
     try {
-      await auth.signOut(); // Reset the firebase auth
-      window.location.href = '/'; // Redirect to home
+      await auth.signOut() // Reset the firebase auth
+      window.location.href = '/' // Redirect to home
     } catch (error) {
-      console.error("Sign out error", error);
+      console.error("Sign out error", error)
     }
   };
 
@@ -39,7 +37,7 @@ const ProfilePage = ({ userEmail }) => {
         height: '100vh',
         paddingTop: theme => theme.spacing(2),
         paddingBottom: theme => theme.spacing(2),
-        overflow: 'hidden',
+        overflow: 'hidden'
       }}
     >
       <Container
@@ -113,7 +111,7 @@ const ProfilePage = ({ userEmail }) => {
               sx={{
                 width: '100%',
                 position: 'sticky',
-                bottom: 0,
+                bottom: 0
               }}
             >
               <BottomNavigationAction
@@ -136,7 +134,7 @@ const ProfilePage = ({ userEmail }) => {
         </Paper>
       </Container>
     </Stack>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage

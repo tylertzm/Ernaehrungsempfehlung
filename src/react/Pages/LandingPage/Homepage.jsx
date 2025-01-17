@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react'
 import {
   Stack,
   Typography,
@@ -9,7 +9,7 @@ import {
   BottomNavigationAction,
   Fab, // Importing Floating Action Button
   Link // Importing Link component
-} from '@mui/material';
+} from '@mui/material'
 import {
   Home as HomeIcon,
   Timeline as TimelineIcon,
@@ -17,25 +17,23 @@ import {
   ArrowDropDown as ArrowDropDownIcon, // Importing the down arrow icon
   Add as AddIcon, // Importing the plus icon
   CloudUpload as UploadIcon,
-} from '@mui/icons-material';
-import AppLogo from '../../assets/favicon.svg';
+} from '@mui/icons-material'
+import AppLogo from '../../assets/favicon.svg'
 
-
-
-const borderRadius = 6;
+const borderRadius = 6
 
 const Homepage = ({ userEmail }) => {
   const galleryItems = [
     { id: 1, text: 'Post 1' },
     { id: 2, text: 'Post 2' },
     { id: 3, text: 'Post 3' }
-  ]; // Updated to include text for each post
-  const scrollContainerRef = useRef(null);
+  ] // Updated to include text for each post
+  const scrollContainerRef = useRef(null)
 
   const handleUploadClick = () => {
     // Logic to open the FileUpload component can be added here
-    console.log("Upload button clicked");
-  };
+    console.log("Upload button clicked")
+  }
 
   return (
     <Stack
@@ -46,7 +44,7 @@ const Homepage = ({ userEmail }) => {
         height: '100vh',
         paddingTop: (theme) => theme.spacing(2),
         paddingBottom: (theme) => theme.spacing(2),
-        overflow: 'hidden',
+        overflow: 'hidden'
       }}
     >
       <Container
@@ -57,7 +55,7 @@ const Homepage = ({ userEmail }) => {
           width: '100%',
           height: '100%',
           maxWidth: '480px',
-          margin: '0 auto',
+          margin: '0 auto'
         }}
       >
         {/* App Header */}
@@ -72,7 +70,7 @@ const Homepage = ({ userEmail }) => {
             alt="Snaptrack Logo"
             style={{
               width: '40px',
-              height: '40px',
+              height: '40px'
             }}
           />
           <Typography variant="h5" sx={{ ml: 1 }}>
@@ -112,10 +110,10 @@ const Homepage = ({ userEmail }) => {
             </Stack>
 
             {/* New Container for Iron Left Message */}
-            <Container 
-              sx={{ 
-                marginTop: 2, 
-                textAlign: 'center', 
+            <Container
+              sx={{
+                marginTop: 2,
+                textAlign: 'center',
                 border: '3px solid', // Added border
                 padding: 1 // Added padding for better appearance
               }}
@@ -133,7 +131,7 @@ const Homepage = ({ userEmail }) => {
               flex="1 1 auto"
               justifyContent="center"
               alignItems="center"
-              sx={{ 
+              sx={{
                 marginTop: 2,
                 width: '100%' // Make sure stack takes full width
               }}
@@ -169,9 +167,9 @@ const Homepage = ({ userEmail }) => {
             </Stack>
 
             <Fab size="medium" color="primary" aria-label="add">
-        <Link href="/tracking/upload" passHref style={{ display: 'flex', padding: 0, margin: 0 }}>
-          <AddIcon style={{ color: 'white' }} />
-             </Link>
+              <Link href="/tracking/upload" passHref style={{ display: 'flex', padding: 0, margin: 0 }}>
+                <AddIcon style={{ color: 'white' }} />
+              </Link>
             </Fab>
             {/* Bottom Navigation */}
             <BottomNavigation
@@ -180,7 +178,7 @@ const Homepage = ({ userEmail }) => {
               sx={{
                 width: '100%',
                 position: 'sticky',
-                bottom: 0,
+                bottom: 0
               }}
             >
               <BottomNavigationAction
@@ -203,7 +201,7 @@ const Homepage = ({ userEmail }) => {
         </Card>
       </Container>
     </Stack>
-  );
-};
+  )
+}
 
-export default Homepage;
+export default Homepage

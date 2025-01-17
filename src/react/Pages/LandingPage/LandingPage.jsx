@@ -1,19 +1,17 @@
-import React from 'react';
+import React from 'react'
 import {
   Stack,
-  Typography,
   Container,
   Paper,
-  Button,
-} from '@mui/material';
-import AppLogo from '../../assets/favicon.svg';
-import { Link } from 'react-router-dom';
-import auth from '../../Hooks/firebase';
-const borderRadius = 6;
+  Button
+} from '@mui/material'
+import { Link } from 'react-router-dom'
+import AppLogo from '../../assets/favicon.svg'
+import auth from '../../Hooks/firebase'
 
-
+const borderRadius = 6
 const LandingPage = () => {
-  const { user } = auth; // Get user state from custom hook
+  const { user } = auth // Get user state from custom hook
 
   return (
     <Stack
@@ -24,7 +22,7 @@ const LandingPage = () => {
         height: '100vh',
         paddingTop: theme => theme.spacing(2),
         paddingBottom: theme => theme.spacing(2),
-        overflow: 'hidden',
+        overflow: 'hidden'
       }}
     >
       <Container
@@ -59,29 +57,28 @@ const LandingPage = () => {
             sx={{
               overflow: 'hidden',
               borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
+              background: theme => theme.palette.background.paper
             }}
           >
-        
-        <img
-          src={AppLogo}
-          alt="App Logo"
-          style={{
-            width: '400px', // Adjusted for responsive size
-            height: 'auto',  // Maintain aspect ratio
-          }}
-        />
-              <>
-                <Button variant="contained" component={Link} to="/home">Login</Button>
-                <br />
-                <Button variant="contained" component={Link} to="/register">Register</Button>
-              </>
+            <img
+              src={AppLogo}
+              alt="App Logo"
+              style={{
+                width: '400px', // Adjusted for responsive size
+                height: 'auto'// Maintain aspect ratio
+              }}
+            />
+            <>
+              <Button variant="contained" component={Link} to="/home">Login</Button>
+              <br />
+              <Button variant="contained" component={Link} to="/register">Register</Button>
+            </>
 
           </Stack>
         </Paper>
       </Container>
     </Stack>
-  );
-};
+  )
+}
 
 export default LandingPage
