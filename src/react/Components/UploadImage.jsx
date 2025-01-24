@@ -1,73 +1,48 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react"
+import storage from "../Hooks/storage"
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage"
+import { v4 } from "uuid"
 
-const UploadImage = () => {
-  const [progresspercent, setProgresspercent] = useState(0)
+function FirebaseImageUpload(){
+    const [img,setImg] =useState('')
+    const [imgUrl,setImgUrl] =useState([])
 
-  const handleUpload = async (e) => {
-    e.preventDefault()
-    const file = e.target[0]?.files[0]
-
-    if (!file) {
-      alert('No file selected!')
-      return
+    const handleClick = () =>{
+     if(img !==null){
+        const imgRef =  ref(storage,`files/${v4()}`)
+        uploadBytes(imgRef,img).then(value=>{
+            console.log(value)
+            getDownloadURL(value.ref).then(url=>{
+                setImgUrl(data=>[...data,url])
+            })
+        })
+     }
     }
 
-    const formData = new FormData()
-    formData.append('file', file)
+    useEffect(()=>{
+        listAll(ref(storage,"files")).then(imgs=>{
+            console.log(imgs)
+            imgs.items.forEach(val=>{
+                getDownloadURL(val).then(url=>{
+                    setImgUrl(data=>[...data,url])
+                })
+            })
+        })
+    },[])
 
-    try {
-      const response = await axios.post('http://localhost:5001/upload', formData, {
-        onUploadProgress: (progressEvent) => {
-          const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100)
-          setProgresspercent(progress)
-        },
-      })
 
-      // Check if the server responded with a success status code (2xx)
-      if (response.status >= 200 && response.status < 300) {
-        // Redirect to /tracking/upload after upload
-        window.location.href = '/tracking/upload'
-      } else {
-        throw new Error('Server responded with an error')
-      }
-    } catch (error) {
-      console.error('Upload error:', error)
-      alert('Failed to upload file.')
-    }
-  }
-
-  return (
-    <div>
-      <form onSubmit={handleUpload}>
-        <input type='file' />
-        <button type='submit'>Upload</button>
-      </form>
-
-      {progresspercent > 0 && (
-        <div>
-          <p>Upload Progress: {progresspercent}%</p>
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#f3f3f3',
-              borderRadius: '5px',
-              overflow: 'hidden',
-              marginTop: '10px',
-            }}
-          >
-            <div
-              style={{
-                width: `${progresspercent}%`,
-                backgroundColor: 'green',
-                height: '10px',
-              }}
-            ></div>
-          </div>
+    return(
+        <div className="App">
+                <input type="file" onChange={(e)=>setImg(e.target.files[0])} /> 
+                <button onClick={handleClick}>Upload</button>
+                <br/>
+                {
+                    imgUrl.map(dataVal=><div>
+                        <img src={dataVal} height="200px" width="200px" />
+                        <br/> 
+                    </div>)
+                }
         </div>
-      )}
-    </div>
-  )
+    )
 }
-
-export default UploadImage
+export default FirebaseImageUpload

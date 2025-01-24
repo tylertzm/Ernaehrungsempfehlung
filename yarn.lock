@@ -12909,6 +12909,7 @@ __metadata:
     react-toastify: "npm:^11.0.2"
     reactstrap: "npm:^9.2.3"
     unique-random-array: "npm:^3.0.0"
+    uuid: "npm:^11.0.5"
   languageName: unknown
   linkType: soft
 
@@ -14988,7 +14989,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.0.2":
+"uuid@npm:^11.0.2, uuid@npm:^11.0.5":
   version: 11.0.5
   resolution: "uuid@npm:11.0.5"
   bin:

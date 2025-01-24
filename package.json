@@ -39,7 +39,8 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^11.0.2",
     "reactstrap": "^9.2.3",
-    "unique-random-array": "^3.0.0"
+    "unique-random-array": "^3.0.0",
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

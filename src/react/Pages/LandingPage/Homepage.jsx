@@ -15,8 +15,7 @@ import {
   Timeline as TimelineIcon,
   Person4 as ProfileIcon,
   ArrowDropDown as ArrowDropDownIcon, // Importing the down arrow icon
-  Add as AddIcon, // Importing the plus icon
-  CloudUpload as UploadIcon,
+  Add as AddIcon // Importing the plus icon
 } from '@mui/icons-material'
 import AppLogo from '../../assets/favicon.svg'
 

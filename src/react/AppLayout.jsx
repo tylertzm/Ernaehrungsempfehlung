@@ -13,7 +13,7 @@ import FileUpload from './Components/UploadImage'
 import auth from './Hooks/firebase'
 
 const AppLayout = () => {
-  const { user } = auth // Get user state from custom hook
+  const { user } = auth
 
   return (
     <Router>
