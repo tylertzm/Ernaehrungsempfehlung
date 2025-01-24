@@ -1,0 +1,11 @@
+gradio==4.36.0
+torch
+torchvision
+opencv-python
+matplotlib
+huggingface_hub
+numpy
+scipy
+Pillow
+flask 
+flask-cors

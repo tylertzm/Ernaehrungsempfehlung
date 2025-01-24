@@ -5,12 +5,12 @@ import {
   Container,
   Paper,
   BottomNavigation,
-  BottomNavigationAction,
+  BottomNavigationAction
 } from '@mui/material'
 import {
   Home as HomeIcon,
   Timeline as TimelineIcon,
-  Person4 as ProfileIcon,
+  Person4 as ProfileIcon
 } from '@mui/icons-material'
 import AppLogo from '../../assets/favicon.svg'
 import { Link } from 'react-router-dom'

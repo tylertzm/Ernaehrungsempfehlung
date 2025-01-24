@@ -6,8 +6,8 @@ import {
   Paper,
   Button,
   TextField,
-  Snackbar,
-} from '@mui/material' // Removed BottomNavigation and BottomNavigationAction imports as they are not used
+  Snackbar
+} from '@mui/material'
 import { Link } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import auth from '../../Hooks/firebase'

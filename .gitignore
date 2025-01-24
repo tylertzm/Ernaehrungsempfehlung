@@ -21,3 +21,26 @@ maps-data
 src/react/Hooks/serviceAccountKey.json
 .yarn
 node_modules
+# Ignore node_modules directory
+
+# Ignore environment files
+.env
+
+# Ignore build outputs
+dist/
+build/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore specific files
+secrets.json
+
+Sam Vit H.pth
+
+depth_anything_v2.pth

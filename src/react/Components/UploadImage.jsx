@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
-import storage from "../Hooks/storage"
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage"
-import { v4 } from "uuid"
+import storage from '../Hooks/storage'
+import {
+  getDownloadURL, listAll, ref, uploadBytes
+} from 'firebase/storage'
+import { v4 } from 'uuid'
+
 
 function FirebaseImageUpload(){
     const [img,setImg] =useState('')
     const [imgUrl,setImgUrl] =useState([])
-
     const handleClick = () =>{
      if(img !==null){
         const imgRef =  ref(storage,`files/${v4()}`)
