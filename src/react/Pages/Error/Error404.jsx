@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Stack,
   Typography,
@@ -6,16 +6,16 @@ import {
   Paper,
   BottomNavigation,
   BottomNavigationAction,
-  Button,
-} from '@mui/material';
+  Button
+} from '@mui/material'
 import {
   Home as HomeIcon,
   Timeline as TimelineIcon,
-  Person4 as ProfileIcon,
-} from '@mui/icons-material';
+  Person4 as ProfileIcon
+} from '@mui/icons-material'
 import AppLogo from '../../assets/favicon.svg'
 
-const borderRadius = 6;
+const borderRadius = 6
 
 const Error404 = () => (
   <Stack
@@ -24,9 +24,9 @@ const Error404 = () => (
     sx={{
       width: '100vw',
       height: '100vh',
-      paddingTop: theme => theme.spacing(2),
-      paddingBottom: theme => theme.spacing(2),
-      overflow: 'hidden',
+      paddingTop: (theme) => (theme).spacing(2),
+      paddingBottom: (theme) => (theme).spacing(2),
+      overflow: 'hidden'
     }}
   >
     <Container
@@ -37,7 +37,7 @@ const Error404 = () => (
         width: '100%',
         height: '100%',
         maxWidth: '480px', // Ensures it doesn’t look overly large on larger screens
-        margin: '0 auto', // Centers the container for larger screens
+        margin: '0 auto' // Centers the container for larger screens
       }}
     >
       <Stack
@@ -51,7 +51,7 @@ const Error404 = () => (
           alt="App Logo"
           style={{
             width: '40px',
-            height: '40px',
+            height: '40px'
           }}
         />
         <Typography variant="h5" sx={{ ml: 1 }}>
@@ -66,8 +66,8 @@ const Error404 = () => (
           flexDirection: 'column',
           padding: 2,
           overflow: 'hidden',
-          borderRadius: theme => theme.spacing(borderRadius),
-          background: theme => theme.palette.grey[900],
+          borderRadius: (theme) => (theme).spacing(borderRadius),
+          background: (theme) => (theme).palette.grey[900]
         }}
       >
         <Stack
@@ -77,8 +77,8 @@ const Error404 = () => (
           alignItems="center"
           sx={{
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.background.paper,
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.background.paper
           }}
         >
           <Stack
@@ -88,7 +88,7 @@ const Error404 = () => (
           >
             <Typography variant="h3">
               <Button href="/LandingPage">Home</Button>
-´            </Typography>
+            </Typography>
           </Stack>
           <BottomNavigation
             showLabels
@@ -96,7 +96,7 @@ const Error404 = () => (
             sx={{
               width: '100%',
               position: 'sticky',
-              bottom: 0,
+              bottom: 0
             }}
           >
             <BottomNavigationAction
@@ -119,6 +119,6 @@ const Error404 = () => (
       </Paper>
     </Container>
   </Stack>
-);
+)
 
 export default Error404

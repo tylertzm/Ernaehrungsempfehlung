@@ -1,10 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
-import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth";
-import { getStorage } from 'firebase/storage';
+import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth"
+import { getStorage } from 'firebase/storage'
 
-import { getFirestore } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,11 +28,11 @@ const auth = getAuth(app)
 // Set session persistence
 setPersistence(auth, browserSessionPersistence)
   .then(() => {
-    console.log("Session persistence set.");
+    console.log("Session persistence set.")
     // You can now call signIn methods
   })
   .catch((error) => {
-    console.error("Error setting session persistence:", error);
+    console.error("Error setting session persistence:", error)
   })
 
-export default auth;
+export default auth

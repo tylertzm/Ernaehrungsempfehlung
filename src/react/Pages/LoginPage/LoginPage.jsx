@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   Stack,
   Typography,
@@ -7,33 +7,33 @@ import {
   Button,
   TextField,
   Snackbar,
-} from '@mui/material'; // Removed BottomNavigation and BottomNavigationAction imports as they are not used
-import { Link } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import auth from '../../Hooks/firebase';
-import AppLogo from '../../assets/favicon.svg';
+} from '@mui/material' // Removed BottomNavigation and BottomNavigationAction imports as they are not used
+import { Link } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import auth from '../../Hooks/firebase'
+import AppLogo from '../../assets/favicon.svg'
 
-const borderRadius = 6;
+const borderRadius = 6
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [openSnackbar, setOpenSnackbar] = useState(false)
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password)
       // Redirect or perform additional actions on successful login
     } catch (err) {
-      setError(err.message);
-      setOpenSnackbar(true);
+      setError(err.message)
+      setOpenSnackbar(true)
     }
-  };
+  }
 
   const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+    setOpenSnackbar(false)
+  }
 
   return (
     <Stack
@@ -42,8 +42,8 @@ const LoginPage = () => {
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        paddingTop: (theme) => (theme).spacing(2),
+        paddingBottom: (theme) => (theme).spacing(2),
         overflow: 'hidden',
       }}
     >
@@ -84,8 +84,8 @@ const LoginPage = () => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.grey[900]
           }}
         >
           <Stack
@@ -95,8 +95,8 @@ const LoginPage = () => {
             alignItems="center"
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
+              borderRadius: (theme) => (theme).spacing(borderRadius),
+              background: (theme) => (theme).palette.background.paper
             }}
           >
             <Stack
@@ -139,7 +139,7 @@ const LoginPage = () => {
         message={error}
       />
     </Stack>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

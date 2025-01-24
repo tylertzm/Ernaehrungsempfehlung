@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   Stack,
   Typography,
@@ -8,52 +8,51 @@ import {
   TextField,
   Snackbar,
   BottomNavigation,
-  BottomNavigationAction,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; // Changed to createUserWithEmailAndPassword
-import auth from '../../Hooks/firebase';
-import AppLogo from '../../assets/favicon.svg';
-import HomeIcon from '@mui/icons-material/Home';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import ProfileIcon from '@mui/icons-material/Person';
+  BottomNavigationAction
+} from '@mui/material'
+import { Link } from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth' // Changed to createUserWithEmailAndPassword
+import auth from '../../Hooks/firebase'
+import AppLogo from '../../assets/favicon.svg'
+import HomeIcon from '@mui/icons-material/Home'
+import TimelineIcon from '@mui/icons-material/Timeline'
+import ProfileIcon from '@mui/icons-material/Person'
 
-const borderRadius = 6;
+const borderRadius = 6
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [openSnackbar, setOpenSnackbar] = useState(false)
 
-  const handleRegister = async () => { // Renamed to handleRegister
-    if (password.length < 8) { // Added password length validation
-      setError('Password must be at least 8 characters');
-      setOpenSnackbar(true);
-      return;
+  const handleRegister = async () => { 
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters')
+      setOpenSnackbar(true)
+      return
     }
     try {
-      await createUserWithEmailAndPassword(auth, email, password); // Changed to createUserWithEmailAndPassword
-      // Redirect or perform additional actions on successful registration
+      await createUserWithEmailAndPassword(auth, email, password)
     } catch (err) {
-      setError(err.message);
-      setOpenSnackbar(true);
+      setError(err.message)
+      setOpenSnackbar(true)
     }
-  };
+  }
 
   const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+    setOpenSnackbar(false)
+  }
 
   return (
     <Stack
-      direction="row"
-      justifyContent="center"
+      direction='row'
+      justifyContent='center'
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        paddingTop: (theme) => (theme).spacing(2),
+        paddingBottom: (theme) => (theme).spacing(2),
         overflow: 'hidden',
       }}
     >
@@ -69,20 +68,20 @@ const RegisterPage = () => {
         }}
       >
         <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
           marginBottom={2}
         >
           <img
             src={AppLogo}
-            alt="App Logo"
+            alt='App Logo'
             style={{
               width: '40px',
               height: '40px',
             }}
           />
-          <Typography variant="h5" sx={{ ml: 1 }}>
+          <Typography variant='h5' sx={{ ml: 1 }}>
             Snaptrack
           </Typography>
         </Stack>
@@ -94,45 +93,45 @@ const RegisterPage = () => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.grey[900],
           }}
         >
           <Stack
-            flex="1 1 auto"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
+            flex='1 1 auto'
+            direction='column'
+            justifyContent='center'
+            alignItems='center'
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
+              borderRadius: (theme) => (theme).spacing(borderRadius),
+              background: (theme) => (theme).palette.background.paper,
             }}
           >
             <Stack
-              flex="1 1 auto"
-              justifyContent="center"
-              alignItems="center"
+              flex='1 1 auto'
+              justifyContent='center'
+              alignItems='center'
             >
-              <Typography variant="h3">Register</Typography>
+              <Typography variant='h3'>Register</Typography>
               <TextField
-                label="Email"
-                variant="outlined"
+                label='Email'
+                variant='outlined'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
-                margin="normal"
+                margin='normal'
               />
               <TextField
-                label="Password must be at least 8 characters"
-                type="password"
-                variant="outlined"
+                label='Password must be at least 8 characters'
+                type='password'
+                variant='outlined'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 fullWidth
-                margin="normal"
+                margin='normal'
               />
-              <Button variant="contained" onClick={handleRegister} sx={{ mt: 2 }}> {/* Changed to handleRegister */}
+              <Button variant='contained' onClick={handleRegister} sx={{ mt: 2 }}> {/* Changed to handleRegister */}
                 Register 
               </Button>
             </Stack>
@@ -146,12 +145,10 @@ const RegisterPage = () => {
               }}
             >
               <BottomNavigationAction
-                label="Home"
+                label='Home'
                 icon={<HomeIcon />}
-                href="/"
+                href='/'
               />
-
-              
             </BottomNavigation>
           </Stack>
         </Paper>
@@ -163,7 +160,7 @@ const RegisterPage = () => {
         message={error}
       />
     </Stack>
-  );
-};
+  )
+}
 
-export default RegisterPage;
+export default RegisterPage

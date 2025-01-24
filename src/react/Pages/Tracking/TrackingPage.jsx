@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 import {
   Stack,
   Typography,
   Container,
   Paper,
   BottomNavigation,
-  BottomNavigationAction,
-} from '@mui/material';
+  BottomNavigationAction
+} from '@mui/material'
 import {
   Home as HomeIcon,
   Timeline as TimelineIcon,
   Person4 as ProfileIcon,
-} from '@mui/icons-material';
-import AppLogo from '../../assets/favicon.svg';
-import { Link } from 'react-router-dom';
+} from '@mui/icons-material'
+import AppLogo from '../../assets/favicon.svg'
+import { Link } from 'react-router-dom'
 
-const borderRadius = 6;
+const borderRadius = 6
 
 const TrackingPage = ({ userEmail }) => (
   <Stack
@@ -24,8 +24,8 @@ const TrackingPage = ({ userEmail }) => (
     sx={{
       width: '100vw',
       height: '100vh',
-      paddingTop: theme => theme.spacing(2),
-      paddingBottom: theme => theme.spacing(2),
+      paddingTop: (theme) => (theme).spacing(2),
+      paddingBottom: (theme) => (theme).spacing(2),
       overflow: 'hidden',
     }}
   >
@@ -66,8 +66,8 @@ const TrackingPage = ({ userEmail }) => (
           flexDirection: 'column',
           padding: 2,
           overflow: 'hidden',
-          borderRadius: theme => theme.spacing(borderRadius),
-          background: theme => theme.palette.grey[900],
+          borderRadius: (theme) => (theme).spacing(borderRadius),
+          background: (theme) => (theme).palette.grey[900],
         }}
       >
         <Stack
@@ -77,8 +77,8 @@ const TrackingPage = ({ userEmail }) => (
           alignItems="center"
           sx={{
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.background.paper,
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.background.paper,
           }}
         >
           <Stack
@@ -98,7 +98,7 @@ const TrackingPage = ({ userEmail }) => (
                   color: 'white',
                   border: 'none',
                   cursor: 'pointer',
-                  borderRadius: '4px',
+                  borderRadius: '4px'
                 }}
               >
                 Upload Image
@@ -152,6 +152,6 @@ const TrackingPage = ({ userEmail }) => (
       </Paper>
     </Container>
   </Stack>
-);
+)
 
 export default TrackingPage

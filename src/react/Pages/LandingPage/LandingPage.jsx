@@ -20,8 +20,8 @@ const LandingPage = () => {
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        paddingTop: (theme) => (theme).spacing(2),
+        paddingBottom: (theme) => (theme).spacing(2),
         overflow: 'hidden'
       }}
     >
@@ -45,8 +45,8 @@ const LandingPage = () => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.grey[900],
           }}
         >
           <Stack
@@ -56,8 +56,8 @@ const LandingPage = () => {
             alignItems="center"
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper
+              borderRadius: (theme) => (theme).spacing(borderRadius),
+              background: (theme) => (theme).palette.background.paper
             }}
           >
             <img

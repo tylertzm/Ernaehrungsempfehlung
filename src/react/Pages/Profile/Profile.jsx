@@ -13,7 +13,7 @@ import {
   Timeline as TimelineIcon,
   Person4 as ProfileIcon
 } from '@mui/icons-material'
-import AppLogo from '../../assets/favicon.svg';
+import AppLogo from '../../assets/favicon.svg'
 import auth from '../../Hooks/firebase' // Import your firebase auth
 
 const borderRadius = 6
@@ -26,7 +26,7 @@ const ProfilePage = ({ userEmail }) => {
     } catch (error) {
       console.error("Sign out error", error)
     }
-  };
+  }
 
   return (
     <Stack
@@ -35,8 +35,8 @@ const ProfilePage = ({ userEmail }) => {
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
+        paddingTop: (theme) => (theme).spacing(2),
+        paddingBottom: (theme) => (theme).spacing(2),
         overflow: 'hidden'
       }}
     >
@@ -77,8 +77,8 @@ const ProfilePage = ({ userEmail }) => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.grey[900],
           }}
         >
           <Stack
@@ -88,8 +88,8 @@ const ProfilePage = ({ userEmail }) => {
             alignItems="center"
             sx={{
               overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
+              borderRadius: (theme) => (theme).spacing(borderRadius),
+              background: (theme) => (theme).palette.background.paper,
             }}
           >
             <Stack

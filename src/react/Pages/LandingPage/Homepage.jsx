@@ -42,8 +42,8 @@ const Homepage = ({ userEmail }) => {
       sx={{
         width: '100vw',
         height: '100vh',
-        paddingTop: (theme) => theme.spacing(2),
-        paddingBottom: (theme) => theme.spacing(2),
+        paddingTop: (theme) => (theme).spacing(2),
+        paddingBottom: (theme) => (theme).spacing(2),
         overflow: 'hidden'
       }}
     >
@@ -87,8 +87,8 @@ const Homepage = ({ userEmail }) => {
             flexDirection: 'column',
             padding: 2,
             overflow: 'hidden',
-            borderRadius: (theme) => theme.spacing(borderRadius),
-            background: (theme) => theme.palette.grey[900],
+            borderRadius: (theme) => (theme).spacing(borderRadius),
+            background: (theme) => (theme).palette.grey[900],
           }}
         >
           <CardContent
@@ -99,8 +99,8 @@ const Homepage = ({ userEmail }) => {
               justifyContent: 'center',
               alignItems: 'center',
               overflow: 'hidden',
-              borderRadius: (theme) => theme.spacing(borderRadius),
-              background: (theme) => theme.palette.background.paper,
+              borderRadius: (theme) => (theme).spacing(borderRadius),
+              background: (theme) => (theme).palette.background.paper,
             }}
           >
             <Stack flex="1 1 auto" justifyContent="center" alignItems="center">

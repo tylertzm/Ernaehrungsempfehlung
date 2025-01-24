@@ -17,8 +17,8 @@ const LogoutButton = () => {
   }
   return (
     <Button
-      variant="contained"
-      color="primary"
+      variant='contained'
+      color='primary'
       onClick={handleSignOut}
       style={{ marginTop: '20px' }}
     >
