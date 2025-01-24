@@ -1,34 +1,34 @@
+import cv2
+import numpy as np
 from flask import Flask, request, jsonify
-from PIL import Image
-import base64
+from bot import predict_estimation
 
 app = Flask(__name__)
+from flask_cors import CORS
+CORS(app)  # This enables CORS for all routes
 
-@app.route('/')
-def index():
-    return '''Server Works!<hr>
-<form action="/processing" method="POST" enctype="multipart/form-data">
-<input type="file" name="image">
-<button>OK</button>
-</form>    
-'''
+@app.route('/upload', methods=['POST'])
+def get_estimation():
+    # Check if an image file was uploaded
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image uploaded'}), 400
 
-@app.route('/processing', methods=['POST'])
-def process():
+    # Read the uploaded file
     file = request.files['image']
-    
-    img = Image.open(file.stream)
-    
-    data = file.stream.read()
-    #data = base64.encodebytes(data)
-    data = base64.b64encode(data).decode()   
+    try:
 
-    return jsonify({
-                'msg': 'success', 
-                'size': [img.width, img.height], 
-                'format': img.format,
-                'img': data
-           })
+        # Get estimation values using get_estimation (pass the image directly)
+        estimation = predict_estimation(file)
+        print(estimation)
+
+        # Return the estimation values as JSON
+        return jsonify(estimation), 200
     
+
+    except Exception as e:
+        # Log the full error message
+        print(f"Error processing image: {e}")
+        return jsonify({'error': 'Something went wrong while processing the image'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)

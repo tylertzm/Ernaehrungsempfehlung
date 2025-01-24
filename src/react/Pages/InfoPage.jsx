@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 import { Stack, Typography } from '@mui/material'
 
-const Profile = () => (
+const InfoPage = () => (
   <Stack
     sx={{
       width: '100%',
@@ -17,7 +17,7 @@ const Profile = () => (
     <Typography
       variant="h4"
     >
-      Your Profile
+      Snaptrack is the app for casual nutrition trackers.
     </Typography>
     <Stack
       width="100%"
@@ -29,4 +29,4 @@ const Profile = () => (
   </Stack>
 )
 
-export default Profile
+export default InfoPage

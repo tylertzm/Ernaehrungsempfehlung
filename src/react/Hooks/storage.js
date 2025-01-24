@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getAuth, setPersistence, browserSessionPersistence } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
@@ -16,16 +15,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
-const auth = getAuth(app)
-
-// Set session persistence
-setPersistence(auth, browserSessionPersistence)
-  .then(() => {
-    console.log("Session persistence set.")
-  })
-  .catch((error) => {
-    console.error("Error setting session persistence:", error)
-  })
 
 const storage = getStorage(app)
 
