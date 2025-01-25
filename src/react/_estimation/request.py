@@ -1,5 +1,3 @@
-import cv2
-import numpy as np
 from flask import Flask, request, jsonify
 from bot import predict_estimation
 
