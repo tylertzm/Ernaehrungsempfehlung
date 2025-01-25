@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Typography } from '@mui/material'
+import { Stack, Typography, IconButton } from '@mui/material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
-import { ArrowForward } from '@mui/icons-material'
+import { getStorage, ref, deleteObject } from 'firebase/storage'
+import { ArrowForward, Delete } from '@mui/icons-material'
 
 const Home = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs())
@@ -71,6 +72,28 @@ const Home = () => {
 
   const handleBackToCalendar = () => {
     setShowEstimations(false)
+  }
+
+  // Delete an estimation from Firestore and its associated image from Firebase Storage
+  const handleDeleteEstimation = async (id, imageUrl) => {
+    try {
+      const db = getFirestore()
+
+      // Delete image from Firebase Storage
+      const storage = getStorage()
+      const imageRef = ref(storage, imageUrl) // Reference to the image in Firebase Storage
+      await deleteObject(imageRef) // Delete the image
+
+      // Now delete the document from Firestore
+      const estimationDoc = doc(db, 'users', id) // Reference to the specific estimation document
+      await deleteDoc(estimationDoc) // Delete the document
+      setEstimations(Estimations.filter((estimation) => estimation.id !== id)) // Remove from the UI
+
+      alert('Estimation and image deleted successfully!')
+    } catch (error) {
+      console.error('Error deleting estimation or image:', error)
+      alert('Failed to delete estimation or image.')
+    }
   }
 
   return (
@@ -222,6 +245,14 @@ const Home = () => {
                   <Typography variant="body2" sx={{ color: '#333' }}>
                     Iron (mg): {doc.estimation[1]?.toFixed(3)}
                   </Typography>
+
+                  {/* Delete Button */}
+                  <IconButton
+                    onClick={() => handleDeleteEstimation(doc.id, doc.imageUrl)}
+                    sx={{ color: 'red', marginTop: 1 }}
+                  >
+                    <Delete />
+                  </IconButton>
                 </Stack>
               ))
             )}
