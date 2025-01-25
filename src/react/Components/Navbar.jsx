@@ -5,8 +5,6 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import auth from '../Hooks/firebase'
 import AppLogo from '../assets/favicon.svg'
@@ -43,41 +41,40 @@ const Navbar = () => {
     }
   }
 
-  // Handle menu icon click, navigate to /History
-  const handleMenuClick = () => {
-    navigate('/History')
-  }
-
   return (
-    <Box sx={{ flexGrow: 1, width: '100%', maxWidth: 'xs', margin: '0 auto' }}>
-      <AppBar position="static" sx={{ borderRadius: 0 }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={handleMenuClick} // Add the click handler here
-          >
-            <MenuIcon />
-          </IconButton>
+    <Box sx={{ flexGrow: 1, width: '100%' }}>
+      <AppBar 
+        position="static" 
+        sx={{
+          backgroundColor: 'white',  // Set background color to white
+          color: 'black',  // Set text color to black
+          boxShadow: 'none',  // Remove shadow
+        }}
+      >
+        <Toolbar 
+          sx={{
+            display: 'flex', 
+            justifyContent: 'center',  // Center content horizontally
+            alignItems: 'center',  // Align vertically in the center
+            width: '100%'
+          }}
+        >
           <img
             src={AppLogo}
             alt="App Logo"
             style={{
-              width: '50px',
-              height: '50px'
+              width: '100px',
+              height: '100px'
             }}
           />
           {user ? (
             // If user is logged in, show a logout button
-            <Button color="inherit" onClick={handleLogout}>
+            <Button color="inherit" onClick={handleLogout} sx={{ position: 'absolute', right: 20 }}>
               Logout
             </Button>
           ) : (
             // If user is not logged in, show a login button
-            <Button color="inherit" onClick={() => (window.location.href = '/login')}>
+            <Button color="inherit" onClick={() => (window.location.href = '/login')} sx={{ position: 'absolute', right: 20 }}>
               Login
             </Button>
           )}

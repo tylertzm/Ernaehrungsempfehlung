@@ -3,8 +3,10 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import storage from '../Hooks/storage';
 import firestore from '../Hooks/firestore';
-import handleUploadAndAddData from '../Hooks/estimation'
 import auth from '../Hooks/firebase';
+import uploadImageAndGetEstimation from '../Hooks/estimation';
+
+
 const Timeline = () => {
   const [image, setImage] = useState(null);
   const [estimation, setEstimation] = useState(null);

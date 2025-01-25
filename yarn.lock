@@ -12971,6 +12971,7 @@ __metadata:
     "@emotion/styled": "npm:^11.14.0"
     "@mui/icons-material": "npm:^6.3.1"
     "@mui/material": "npm:^6.3.0"
+    "@mui/system": "npm:^6.4.1"
     "@mui/x-date-pickers": "npm:^7.24.1"
     axios: "npm:^1.7.9"
     cors: "npm:^2.8.5"

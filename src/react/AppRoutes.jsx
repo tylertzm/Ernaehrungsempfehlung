@@ -41,7 +41,6 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Timeline" element={<Timeline />} />
-      <Route path="/History" element={<UserDocumentsPage />} />
       <Route path="/profile" element={<Profile />}>
         <Route path="" element={<ProfileOverview />} />
         <Route path="settings" element={<ProfileSettings />} />
