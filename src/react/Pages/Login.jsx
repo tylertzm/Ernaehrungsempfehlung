@@ -22,7 +22,7 @@ const Login = () => {
       setLoading(false)
       alert('Login successful')
 
-      // Navigate to the Home screen after successful login
+      // Navigate to the Home screen afterd successful login
       navigate('/')
     } catch (error) {
       setError(error.message)

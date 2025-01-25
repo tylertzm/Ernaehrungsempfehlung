@@ -2,7 +2,6 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Stack,
-  Typography,
   Container,
   Paper,
   BottomNavigation,
@@ -13,10 +12,8 @@ import {
   Timeline,
   Person4 as ProfileIcon
 } from '@mui/icons-material'
-import { useAuth } from 'firebase/auth'
 import AppRoutes from './AppRoutes'
 import Navbar from './Components/Navbar'
-import AppLogo from './assets/favicon.svg'
 
 const borderRadius = 6
 
@@ -25,18 +22,19 @@ const AppLayout = () => {
   const navigate = useNavigate()
 
   let navigationIndex = 0
-  if (location.pathname.startsWith('/Timeline')) navigationIndex = 1
+  if (location.pathname.startsWith('/Estimate')) navigationIndex = 1
   if (location.pathname.startsWith('/profile')) navigationIndex = 2
 
   return (
     <Stack
       direction="row"
       justifyContent="center"
+      alignItems="center"
       sx={{
         width: '100%',
-        height: '100%',
-        paddingTop: (theme) => theme.spacing(5),
-        paddingBottom: (theme) => theme.spacing(5)
+        height: '100vh', // Full viewport height
+        background: (theme) => theme.palette.background.default,
+        overflow: 'hidden',
       }}
     >
       <Container
@@ -45,62 +43,80 @@ const AppLayout = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100%',
-          overflowY: 'auto', // Make the container scrollable when content overflows
+          justifyContent: 'space-between',
+          height: 'calc(100vh)', // Full viewport height
+          width: '100%',
+          borderRadius: (theme) => theme.spacing(5),
+          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.3)', // Slightly stronger shadow
+          background: (theme) => theme.palette.background.paper,
+          overflow: 'hidden',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
         }}
       >
+        <Navbar />
+
         <Paper
-          elevation={6}
+          elevation={0}
           sx={{
             flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
-            paddingTop: 2,
-            paddingRight: 1,
-            paddingBottom: 2,
-            paddingLeft: 1,
-            overflow: 'hidden',
+            justifyContent: 'space-between',
+            padding: 2,
             borderRadius: (theme) => theme.spacing(borderRadius),
-            background: (theme) => theme.palette.grey[900],
-            maxHeight: 'calc(100vh - 64px)' // Adjust max height to leave space for navbar and bottom nav
+            background: (theme) => theme.palette.background.default,
+            overflowY: 'auto',
+            boxShadow: '0 2px 5px rgba(255, 255, 255, 0.1)', // Soft shadow
           }}
         >
-          <Stack
-            flex="1 1 auto"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-              overflow: 'hidden',
-              borderRadius: (theme) => theme.spacing(borderRadius),
-              background: (theme) => theme.palette.background.paper
-            }}
-          >
-            <Navbar />
-            <AppRoutes />
-            <BottomNavigation
-              showLabels
-              value={navigationIndex}
-              sx={{ width: '100%' }}
-            >
-              <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon />}
-                onClick={() => navigate('/')}
-              />
-              <BottomNavigationAction
-                label="Timeline"
-                icon={<Timeline />}
-                onClick={() => navigate('Timeline')}
-              />
-              <BottomNavigationAction
-                label="Profile"
-                icon={<ProfileIcon />}
-                onClick={() => navigate('/profile')}
-              />
-            </BottomNavigation>
-          </Stack>
+          <AppRoutes />
         </Paper>
+
+        <BottomNavigation
+          showLabels
+          value={navigationIndex}
+          sx={{
+            width: '100%',
+            height: 56, // Fixed height for BottomNavigation
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)', // Lighter border for a subtle effect
+            flexShrink: 0, // Prevent BottomNavigation from shrinking
+            backgroundColor: '#1f1f1f', // Dark background for BottomNavigation
+          }}
+        >
+          <BottomNavigationAction
+            label="Home"
+            icon={<HomeIcon />}
+            onClick={() => navigate('/')}
+            sx={{
+              color: 'white',
+              '&.Mui-selected': {
+                color: '#ff4081', // Vibrant pink accent on active
+              },
+            }}
+          />
+          <BottomNavigationAction
+            label="Estimate"
+            icon={<Timeline />}
+            onClick={() => navigate('/Estimate')}
+            sx={{
+              color: 'white',
+              '&.Mui-selected': {
+                color: '#ff4081', // Vibrant pink accent on active
+              },
+            }}
+          />
+          <BottomNavigationAction
+            label="Profile"
+            icon={<ProfileIcon />}
+            onClick={() => navigate('/profile')}
+            sx={{
+              color: 'white',
+              '&.Mui-selected': {
+                color: '#ff4081', // Vibrant pink accent on active
+              },
+            }}
+          />
+        </BottomNavigation>
       </Container>
     </Stack>
   )

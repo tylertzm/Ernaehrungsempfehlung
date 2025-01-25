@@ -8,11 +8,9 @@ import InfoPage from './Pages/InfoPage'
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
-import Timeline from './Pages/Timeline'
+import Estimate from './Pages/Estimate'
 
 import Profile from './Pages/Profile/Profile'
-import ProfileOverview from './Pages/Profile/ProfileOverview'
-import ProfileSettings from './Pages/Profile/ProfileSettings'
 
 import Error404 from './Pages/Error404'
 
@@ -40,12 +38,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/Timeline" element={<Timeline />} />
-      <Route path="/profile" element={<Profile />}>
-        <Route path="" element={<ProfileOverview />} />
-        <Route path="settings" element={<ProfileSettings />} />
-
-      </Route>
+      <Route path="/Estimate" element={<Estimate />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<Error404 />} />
     </Routes>
   )
