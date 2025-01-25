@@ -1,108 +1,121 @@
-import React, { useState } from 'react';
-import { Stack, Typography, Button, Input } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { collection, addDoc } from 'firebase/firestore';
 import storage from '../Hooks/storage';
-import { useAuth } from '../Hooks/AuthProvider';
-import uploadImageAndGetEstimation from '../Hooks/estimation'; // Import the function
-
+import firestore from '../Hooks/firestore';
+import handleUploadAndAddData from '../Hooks/estimation'
+import auth from '../Hooks/firebase';
 const Timeline = () => {
-  const { user } = useAuth(); // Correctly call the hook inside the component
   const [image, setImage] = useState(null);
   const [estimation, setEstimation] = useState(null);
-  const [error, setError] = useState('');
-  const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Handle file change
-  const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
+
+  const userEmail = auth.currentUser?.email; // Get the user's email from Firebase Authentication
+
+  // Handle image change
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+    }
   };
 
-  // Handle file upload to Firebase Storage and get estimation
-  const handleUpload = async () => {
-    if (!image) {
-      setError('Please select an image to upload.');
-      return;
-    }
-
-    if (!user) {
-      setError('You must be logged in to upload an image.');
-      return;
-    }
-
-    setUploading(true);
-    setError('');
-
+  // Handle the file upload and data addition to Firestore
+  const handleUploadAndAddData = async (image, userEmail) => {
     try {
-      // Upload image to Firebase Storage
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-'); // Format timestamp to be Firebase-friendly
-      const folderName = user.email; // Use user's email as the folder name
-      const imageName = `${timestamp}.jpg`; // Use timestamp as the filename
+      if (!image || !userEmail) {
+        throw new Error("No image selected or user is not authenticated");
+      }
+
+      setLoading(true);
+
+      // Prepare file details
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const folderName = userEmail; // Using user's email as folder name
+      const imageName = `${timestamp}.jpg`; // Name image with timestamp
       const storageRef = ref(storage, `${folderName}/${imageName}`);
+      
+      console.log(`Uploading to path: ${folderName}/${imageName}`);
+
+      // Upload the image
       await uploadBytes(storageRef, image);
 
       // Get the download URL of the uploaded image
-      // const imageUrl = await getDownloadURL(storageRef);
+      const downloadURL = await getDownloadURL(storageRef);
+      console.log('Download URL: ', downloadURL);
 
-      // Get estimation using the image URL
-      const result = await uploadImageAndGetEstimation(image);
-      setEstimation(result);
-    } catch (err) {
-      setError(err.message);
-      setEstimation(null);
+      // Get estimation using the image
+      const result = await uploadImageAndGetEstimation(image);  // Pass image to estimation function
+      console.log('Estimation Result:', result);
+      setEstimation(result); // Set estimation result
+
+      // Add data to Firestore
+      const docRef = await addDoc(collection(firestore, 'users'), {
+        email: userEmail,
+        imageUrl: downloadURL,
+        timestamp: timestamp,
+        estimation: result, // Store estimation result as JSON
+      });
+      console.log('Document written with ID: ', docRef.id);
+
+    } catch (error) {
+      console.error('Error uploading image or adding document: ', error);
     } finally {
-      setUploading(false);
+      setLoading(false);
     }
   };
 
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (image && userEmail) {
+      try {
+        await handleUploadAndAddData(image, userEmail);
+      } catch (error) {
+        console.error('Error uploading data:', error);
+      }
+    } else {
+      alert('Please select an image and make sure you are logged in.');
+    }
+  };
+
+  useEffect(() => {
+    if (!userEmail) {
+      alert("User is not authenticated.");
+    }
+  }, [userEmail]);
+
   return (
-    <Stack
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 2,
-      }}
-    >
-      <Typography variant="h4" gutterBottom>
-        Upload an Image
-      </Typography>
+    <div className="upload-page">
+      <h1>Upload Image and Get Estimation</h1>
 
-      {/* Hidden file input triggered by button */}
-      <Input
-        type="file"
-        inputProps={{ accept: 'image/*' }}
-        onChange={handleFileChange}
-        sx={{ display: 'none' }}
-        id="upload-file"
-      />
-      <label htmlFor="upload-file">
-        <Button variant="contained" component="span">
-          Choose File
-        </Button>
-      </label>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>
+            Select Image:
+            <input
+              type="file"
+              onChange={handleImageChange}
+              accept="image/*"
+              required
+            />
+          </label>
+        </div>
 
-      <Button
-        variant="contained"
-        onClick={handleUpload}
-        sx={{ marginTop: '10px' }}
-        disabled={uploading}
-      >
-        {uploading ? 'Uploading...' : 'Upload'}
-      </Button>
-
-      {error && <Typography color="error">{error}</Typography>}
+        <button type="submit" disabled={loading}>
+          {loading ? 'Uploading...' : 'Upload'}
+        </button>
+      </form>
 
       {estimation && (
-        <div style={{ marginTop: '20px' }}>
-          <Typography variant="h6">Estimation Results</Typography>
-          <pre>{JSON.stringify(estimation, null, 2)}</pre>
+        <div>
+          <h3>Estimation Result:</h3>
+          <pre>{JSON.stringify(estimation, null, 2)}</pre> {/* Display the result as formatted JSON */}
         </div>
       )}
-    </Stack>
+    </div>
   );
 };
 

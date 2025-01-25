@@ -1,7 +1,5 @@
 import React from 'react'
-
 import { useLocation, useNavigate } from 'react-router-dom'
-
 import {
   Stack,
   Typography,
@@ -10,19 +8,14 @@ import {
   BottomNavigation,
   BottomNavigationAction
 } from '@mui/material'
-
 import {
   HealthAndSafety as HomeIcon,
   Timeline,
   Person4 as ProfileIcon
 } from '@mui/icons-material'
-
 import { useAuth } from 'firebase/auth'
-
 import AppRoutes from './AppRoutes'
-
 import Navbar from './Components/Navbar'
-
 import AppLogo from './assets/favicon.svg'
 
 const borderRadius = 6
@@ -42,18 +35,18 @@ const AppLayout = () => {
       sx={{
         width: '100%',
         height: '100%',
-        paddingTop: (theme) => (theme).spacing(5),
-        paddingBottom: (theme) => (theme).spacing(5)
+        paddingTop: (theme) => theme.spacing(5),
+        paddingBottom: (theme) => theme.spacing(5)
       }}
     >
-
       <Container
         maxWidth="xs"
         disableGutters
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100%'
+          height: '100%',
+          overflowY: 'auto', // Make the container scrollable when content overflows
         }}
       >
         <Paper
@@ -67,8 +60,9 @@ const AppLayout = () => {
             paddingBottom: 2,
             paddingLeft: 1,
             overflow: 'hidden',
-            borderRadius: (theme) => (theme).spacing(borderRadius),
-            background: (theme) => (theme).palette.grey[900]
+            borderRadius: (theme) => theme.spacing(borderRadius),
+            background: (theme) => theme.palette.grey[900],
+            maxHeight: 'calc(100vh - 64px)' // Adjust max height to leave space for navbar and bottom nav
           }}
         >
           <Stack
@@ -78,8 +72,8 @@ const AppLayout = () => {
             alignItems="center"
             sx={{
               overflow: 'hidden',
-              borderRadius: (theme) => (theme).spacing(borderRadius),
-              background: (theme) => (theme).palette.background.paper
+              borderRadius: (theme) => theme.spacing(borderRadius),
+              background: (theme) => theme.palette.background.paper
             }}
           >
             <Navbar />

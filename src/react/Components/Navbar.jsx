@@ -43,6 +43,11 @@ const Navbar = () => {
     }
   }
 
+  // Handle menu icon click, navigate to /History
+  const handleMenuClick = () => {
+    navigate('/History')
+  }
+
   return (
     <Box sx={{ flexGrow: 1, width: '100%', maxWidth: 'xs', margin: '0 auto' }}>
       <AppBar position="static" sx={{ borderRadius: 0 }}>
@@ -53,6 +58,7 @@ const Navbar = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={handleMenuClick} // Add the click handler here
           >
             <MenuIcon />
           </IconButton>
