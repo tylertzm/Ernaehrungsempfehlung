@@ -46,7 +46,7 @@ const InfoPage = () => {
         padding: 2,
         background: '#ffffff',
         animation: `${fadeIn} 1s ease-in-out`,
-        position: 'relative', // Ensures the positioning of the arrow is relative to the Stack
+        position: 'relative' // Ensures the positioning of the arrow is relative to the Stack
       }}
     >
       {/* Conditionally render original or updated text */}
@@ -57,7 +57,7 @@ const InfoPage = () => {
             fontWeight: 'bold',
             textAlign: 'center',
             fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-            animation: `${slideUp} 1s ease-in-out`,
+            animation: `${slideUp} 1s ease-in-out`
           }}
         >
           Snaptrack is the app for casual nutrition trackers.
@@ -70,7 +70,7 @@ const InfoPage = () => {
             textAlign: 'center',
             fontSize: { xs: '1.5rem', sm: '1.8rem', md: '2rem' },
             marginTop: 1,
-            animation: `${slideUp} 1.5s ease-in-out`,
+            animation: `${slideUp} 1.5s ease-in-out`
           }}
         >
           Snap and track your micronutritional intake now
@@ -86,7 +86,7 @@ const InfoPage = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 2,
+          marginTop: 2
         }}
       >
         <Outlet />
@@ -96,7 +96,7 @@ const InfoPage = () => {
       <Box
         sx={{
           position: 'absolute',
-          animation: `${slideUp} 1.5s ease-in-out`,
+          animation: `${slideUp} 1.5s ease-in-out`
         }}
       >
         <IconButton onClick={handleArrowClick}>

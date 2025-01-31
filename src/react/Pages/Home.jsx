@@ -42,7 +42,7 @@ const Home = () => {
 
       const docsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        ...doc.data()
       }))
 
       setEstimations(docsData)
@@ -50,7 +50,6 @@ const Home = () => {
       // Calculate the total iron from all Estimations
       const totalIronConsumed = docsData.reduce((acc, doc) => acc + (doc.estimation[1] || 0), 0)
       setTotalIron(totalIronConsumed)
-
     } catch (err) {
       console.error('Error fetching Estimations:', err)
       setError('Error fetching Estimations.')
@@ -105,7 +104,7 @@ const Home = () => {
         alignItems: 'center',
         padding: 0,
         overflowY: 'auto',
-        backgroundColor: '#ffffff', // Ensure the background is always white
+        backgroundColor: '#ffffff' // Ensure the background is always white
       }}
     >
       {/* Display total iron consumption */}
@@ -121,7 +120,8 @@ const Home = () => {
           marginBottom: 2
         }}
       >
-        {totalIron.toFixed(2)} mg of iron
+        {totalIron.toFixed(2)}
+        mg of iron tracked.
       </Typography>
 
       {/* Calendar Component */}
@@ -133,18 +133,18 @@ const Home = () => {
             backgroundColor: '#ffffff',
             color: '#000000',
             '& .MuiDayPickerDay-root': {
-              color: '#000000',
+              color: '#000000'
             },
             '& .Mui-selected': {
               backgroundColor: '#000000',
-              color: '#ffffff',
+              color: '#ffffff'
             },
             '& .MuiDayPickerDay-root:hover': {
-              backgroundColor: '#444444',
+              backgroundColor: '#444444'
             },
             '& .MuiDayPickerDay-root.Mui-disabled': {
-              color: '#000000',
-            },
+              color: '#000000'
+            }
           }}
         />
       </LocalizationProvider>
@@ -166,8 +166,8 @@ const Home = () => {
             boxShadow: 3,
             '&:hover': {
               boxShadow: 6,
-              transform: 'scale(1.05)',
-            },
+              transform: 'scale(1.05)'
+            }
           }}
           onClick={handleViewEstimations}
         >
@@ -177,10 +177,11 @@ const Home = () => {
               fontWeight: 'bold',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
           >
-            View Estimations 📝 <ArrowForward sx={{ marginLeft: 1 }} />
+            View Estimations 📝
+            <ArrowForward sx={{ marginLeft: 1 }} />
           </Typography>
         </Stack>
       )}
@@ -198,16 +199,18 @@ const Home = () => {
             cursor: 'pointer',
             backgroundColor: '#ffffff',
             boxShadow: 3,
-            borderRadius: 2,
+            borderRadius: 2
           }}
         >
           <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.25rem' }}>
-            Estimations for {selectedDate.format('YYYY-MM-DD')}:
+            Estimations for
+            {selectedDate.format('YYYY-MM-DD')}
+            :
           </Typography>
           <Stack
             spacing={2}
             sx={{
-              cursor: 'default',
+              cursor: 'default'
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -216,7 +219,7 @@ const Home = () => {
                 No Estimations found for this date.
               </Typography>
             ) : (
-              Estimations.map((doc) => (
+              Estimations.map(() => (
                 <Stack
                   key={doc.id}
                   spacing={2}
@@ -225,7 +228,7 @@ const Home = () => {
                     borderRadius: 2,
                     boxShadow: 2,
                     backgroundColor: '#f3f3f3',
-                    textAlign: 'center',
+                    textAlign: 'center'
                   }}
                 >
                   <img
@@ -236,17 +239,22 @@ const Home = () => {
                       maxWidth: '300px',
                       objectFit: 'cover',
                       borderRadius: '8px',
-                      marginBottom: '1rem',
+                      marginBottom: '1rem'
                     }}
                   />
                   <Typography variant="body2" sx={{ color: '#333' }}>
-                    Weight (g): {doc.estimation[0]?.toFixed(2)}
+                    Weight (g):
+                    {
+                    doc.estimation[0]?.toFixed(2)
+                    }
                   </Typography>
                   <Typography variant="body2" sx={{ color: '#333' }}>
-                    Iron (mg): {doc.estimation[1]?.toFixed(3)}
+                    Iron (mg):
+                    {
+                    doc.estimation[1]?.toFixed(3)
+                    }
                   </Typography>
 
-                  {/* Delete Button */}
                   <IconButton
                     onClick={() => handleDeleteEstimation(doc.id, doc.imageUrl)}
                     sx={{ color: 'red', marginTop: 1 }}
@@ -259,7 +267,9 @@ const Home = () => {
           </Stack>
           <Typography
             variant="body2"
-            sx={{ marginTop: 2, textAlign: 'center', color: 'gray', cursor: 'pointer' }}
+            sx={{
+              marginTop: 2, textAlign: 'center', color: 'gray', cursor: 'pointer'
+            }}
             onClick={handleBackToCalendar}
           >
             Click here to return to the calendar.

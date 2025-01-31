@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
-import { Button, CircularProgress, Typography, Alert } from '@mui/material'
+import {
+  Button, CircularProgress, Typography, Alert
+} from '@mui/material'
 import { FileUpload, Error } from '@mui/icons-material'
 import storage from '../Hooks/storage'
 import firestore from '../Hooks/firestore'
@@ -169,7 +171,7 @@ const Estimate = () => {
               },
               '&.Mui-disabled': {
                 background: 'linear-gradient(145deg, #f1f1f1, #dcdcdc)',
-                color: '#888',
+                color: '#888'
               }
             }}
           >
@@ -195,14 +197,17 @@ const Estimate = () => {
             borderRadius: '10px',
             backgroundColor: '#ffffff',
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-            display: 'inline-block',
-          }}>
+            display: 'inline-block'
+          }}
+          >
             <Typography variant="h5" style={{ marginBottom: '10px', color: '#2C6BC9', fontWeight: '500' }}>
-              Weight: {estimation[0].toFixed(2)} g
+              Weight: {estimation[0].toFixed(2)}
+              g
             </Typography>
 
             <Typography variant="h5" style={{ color: '#FF7043', fontWeight: '500' }}>
-              Iron: {estimation[1].toFixed(2)} mg
+              Iron: {estimation[1].toFixed(2)}
+              mg
             </Typography>
           </div>
         </div>

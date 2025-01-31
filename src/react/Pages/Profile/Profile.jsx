@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { Stack, Typography, Paper, Avatar, Divider, Button } from '@mui/material'
+import {
+  Stack, Typography, Paper, Avatar, Divider, Button
+} from '@mui/material'
 import { getAuth } from 'firebase/auth'
 import SettingsIcon from '@mui/icons-material/Settings'
 
@@ -30,7 +32,7 @@ const Profile = () => {
           justifyContent: 'center',
           alignItems: 'center',
           padding: 2,
-          backgroundColor: '#f9f9f9',
+          backgroundColor: '#f9f9f9'
         }}
       >
         <Typography variant="h6" sx={{ color: '#000', textAlign: 'center' }}>
@@ -49,7 +51,7 @@ const Profile = () => {
           justifyContent: 'center',
           alignItems: 'center',
           padding: 2,
-          backgroundColor: '#f9f9f9',
+          backgroundColor: '#f9f9f9'
         }}
       >
         <Typography variant="h6" sx={{ color: '#f44336', textAlign: 'center' }}>
@@ -68,7 +70,7 @@ const Profile = () => {
         justifyContent: 'center',
         alignItems: 'center',
         padding: 2,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#f9f9f9'
       }}
     >
       {/* Settings Button */}
@@ -83,10 +85,10 @@ const Profile = () => {
           backgroundColor: '#fff',
           color: '#fff',
           '&:hover': {
-            backgroundColor: '#f0f0f0',
+            backgroundColor: '#f0f0f0'
           },
           padding: '8px 15px',
-          fontSize: '1rem',
+          fontSize: '1rem'
         }}
       >
         Settings
@@ -107,7 +109,6 @@ const Profile = () => {
           overflowY: 'auto'
         }}
       >
-        {/* User Avatar */}
         <Avatar
           alt={currentUser.displayName || 'User'}
           src={currentUser.photoURL}
@@ -115,7 +116,7 @@ const Profile = () => {
             width: 120,
             height: 120,
             border: '5px solid #fff',
-            marginBottom: 3,
+            marginBottom: 3
           }}
         />
 
@@ -132,7 +133,7 @@ const Profile = () => {
 
         {/* Fun About Section */}
         <Typography variant="body1" sx={{ color: '#777', fontStyle: 'italic', textAlign: 'center' }}>
-          You're awesome! 🎉 Keep shining and being your best self! ✨
+          This still under development! ✨
         </Typography>
       </Paper>
 
