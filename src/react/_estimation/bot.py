@@ -97,11 +97,11 @@ def predict_estimation(img):
     volume_cm3 = volume * 5000  # Example conversion factor (adjust based on depth units)
 
     # Estimate the weight
-    weight = density * volume_cm3
+    weight = round(density * volume_cm3,2)
 
     # Calculate the iron content
     iron_per_100g = 0.73  # mg of iron per 100 g of chicken breast
-    total_iron = (weight / 100) * iron_per_100g  # Total iron content in mg
+    total_iron = round((weight / 100) * iron_per_100g,2)  # Total iron content in mg
 
     # Output the estimated weight and iron content
     return weight, total_iron

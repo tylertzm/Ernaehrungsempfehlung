@@ -96,7 +96,8 @@ const InfoPage = () => {
       <Box
         sx={{
           position: 'absolute',
-          animation: `${slideUp} 1.5s ease-in-out`
+          animation: `${slideUp} 1.5s ease-in-out`,
+          paddingTop: 25
         }}
       >
         <IconButton onClick={handleArrowClick}>
