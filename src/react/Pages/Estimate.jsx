@@ -49,10 +49,10 @@ const Estimate = () => {
 
       // Upload image to Firebase storage
       await uploadBytes(storageRef, image)
-      const downloadURL = await getDownloadURL(storageRef) // Get the download URL after uploading
+      const downloadURL = await getDownloadURL(storageRef)
 
       // Use the downloadURL for the image preview
-      setImagePreview(downloadURL) // Set the downloadURL as the image preview
+      setImagePreview(downloadURL)
 
       // Get the estimation from the image (iron, calories, etc.)
       const result = await uploadImageAndGetEstimation(image)
@@ -68,7 +68,7 @@ const Estimate = () => {
         imageUrl: downloadURL,
         timestamp,
         estimation: result,
-        ironEstimation: estimatedIron,
+        ironEstimation: estimatedIron
       })
     } catch (error) {
       setError(error.message)
@@ -169,7 +169,7 @@ const Estimate = () => {
                 transform: 'scale(1.05)',
                 boxShadow: '7px 7px 20px rgba(0, 0, 0, 0.3), -7px -7px 20px rgba(255, 255, 255, 0.6)',
               },
-              '&.Mui-disabled': {
+              '&.MuiDisabled': {
                 background: 'linear-gradient(145deg, #f1f1f1, #dcdcdc)',
                 color: '#888'
               }

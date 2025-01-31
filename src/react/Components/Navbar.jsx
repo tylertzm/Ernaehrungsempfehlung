@@ -1,14 +1,13 @@
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import auth from '../Hooks/firebase'
 import AppLogo from '../assets/favicon.svg'
-import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const [user, setUser] = useState(null) // State to track the user's authentication status
@@ -35,7 +34,7 @@ const Navbar = () => {
     try {
       await signOut(auth)
       console.log('User signed out')
-      navigate('/Login')
+      navigate('/')
     } catch (error) {
       console.error('Error signing out:', error)
     }
@@ -43,19 +42,19 @@ const Navbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1, width: '100%' }}>
-      <AppBar 
-        position="static" 
+      <AppBar
+        position="static"
         sx={{
-          backgroundColor: 'white',  // Set background color to white
-          color: 'black',  // Set text color to black
-          boxShadow: 'none',  // Remove shadow
+          backgroundColor: 'white', // Set background color to white
+          color: 'black', // Set text color to black
+          boxShadow: 'none'// Remove shadow
         }}
       >
-        <Toolbar 
+        <Toolbar
           sx={{
-            display: 'flex', 
-            justifyContent: 'center',  // Center content horizontally
-            alignItems: 'center',  // Align vertically in the center
+            display: 'flex',
+            justifyContent: 'center', // Center content horizontally
+            alignItems: 'center', // Align vertically in the center
             width: '100%'
           }}
         >

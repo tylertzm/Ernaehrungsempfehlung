@@ -31,10 +31,12 @@ const AppLayout = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
+        paddingTop: 5,
+        paddingBottom: 5,
         width: '100%',
-        height: '100vh', // Full viewport height
+        height: '100%', // Full viewport height
         background: (theme) => theme.palette.background.default,
-        overflow: 'hidden',
+        overflow: 'hidden'
       }}
     >
       <Container
@@ -44,7 +46,7 @@ const AppLayout = () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          height: 'calc(100vh)', // Full viewport height
+          height: '100%', // Full viewport height
           width: '100%',
           borderRadius: (theme) => theme.spacing(5),
           boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.3)', // Slightly stronger shadow

@@ -73,26 +73,7 @@ const Profile = () => {
         backgroundColor: '#f9f9f9'
       }}
     >
-      {/* Settings Button */}
-      <Button
-        variant="outlined"
-        startIcon={<SettingsIcon />}
-        onClick={() => navigate('/profile/settings')}
-        sx={{
-          position: 'absolute',
-          top: 20,
-          right: 20,
-          backgroundColor: '#fff',
-          color: '#fff',
-          '&:hover': {
-            backgroundColor: '#f0f0f0'
-          },
-          padding: '8px 15px',
-          fontSize: '1rem'
-        }}
-      >
-        Settings
-      </Button>
+
       <Paper
         sx={{
           width: '100%',
