@@ -11,7 +11,6 @@ import uploadImageAndGetEstimation from '../Hooks/estimation'
 const Estimate = () => {
   const [image, setImage] = useState(null)
   const [estimation, setEstimation] = useState(null)
-  const [dailyIntake, setDailyIntake] = useState(18) // Assuming 18 mg is the daily recommended intake for iron
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [imagePreview, setImagePreview] = useState(null) // New state for image preview
