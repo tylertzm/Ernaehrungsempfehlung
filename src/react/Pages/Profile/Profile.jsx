@@ -1,6 +1,7 @@
-import React from 'react';
-import LogoutButton from './SignOut';
+import React, { useState, useEffect } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import {
+<<<<<<< HEAD
   Stack,
   Typography,
   Container,
@@ -17,126 +18,129 @@ import {
 import AppLogo from '../../assets/favicon.svg';
 import { Link } from 'react-router-dom';
 import { auth } from '../../Hooks/firebase'; // Import your firebase auth
+=======
+  Stack, Typography, Paper, Avatar, Divider, Button
+} from '@mui/material'
+import { getAuth } from 'firebase/auth'
+import SettingsIcon from '@mui/icons-material/Settings'
+>>>>>>> main
 
-const borderRadius = 6;
+const Profile = () => {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-const ProfilePage = ({ userEmail }) => {
-  const handleSignOut = async () => {
-    try {
-      await auth.signOut(); // Reset the firebase auth
-      window.location.href = '/'; // Redirect to home
-    } catch (error) {
-      console.error("Sign out error", error);
+  const navigate = useNavigate()// For navigation to settings page
+  const auth = getAuth()
+  const currentUser = auth.currentUser
+
+  useEffect(() => {
+    if (!currentUser) {
+      setError('User is not authenticated.')
+      setLoading(false)
+    } else {
+      setLoading(false)
     }
-  };
+  }, [currentUser])
+
+  if (loading) {
+    return (
+      <Stack
+        sx={{
+          width: '100%',
+          height: '100vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 2,
+          backgroundColor: '#f9f9f9'
+        }}
+      >
+        <Typography variant="h6" sx={{ color: '#000', textAlign: 'center' }}>
+          Loading your profile...
+        </Typography>
+      </Stack>
+    )
+  }
+
+  if (error) {
+    return (
+      <Stack
+        sx={{
+          width: '100%',
+          height: '100vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 2,
+          backgroundColor: '#f9f9f9'
+        }}
+      >
+        <Typography variant="h6" sx={{ color: '#f44336', textAlign: 'center' }}>
+          {error}
+        </Typography>
+      </Stack>
+    )
+  }
 
   return (
     <Stack
-      direction="row"
-      justifyContent="center"
+      spacing={3}
       sx={{
-        width: '100vw',
+        width: '100%',
         height: '100vh',
-        paddingTop: theme => theme.spacing(2),
-        paddingBottom: theme => theme.spacing(2),
-        overflow: 'hidden',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 2,
+        backgroundColor: '#f9f9f9'
       }}
     >
-      <Container
-        disableGutters
+
+      <Paper
         sx={{
+          width: '100%',
+          maxWidth: 600,
+          height: 'auto',
+          padding: 4,
+          borderRadius: 3,
+          backgroundColor: '#fff',
+          color: '#333',
           display: 'flex',
           flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          maxWidth: '480px',
-          margin: '0 auto',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflowY: 'auto'
         }}
       >
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          marginBottom={2}
-        >
-          <img
-            src={AppLogo}
-            alt="Snaptrack Logo"
-            style={{
-              width: '40px',
-              height: '40px',
-            }}
-          />
-          <Typography variant="h5" sx={{ ml: 1 }}>
-            Snaptrack
-          </Typography>
-        </Stack>
-        <Paper
-          elevation={6}
+        <Avatar
+          alt={currentUser.displayName || 'User'}
+          src={currentUser.photoURL}
           sx={{
-            flex: '1 1 auto',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: 2,
-            overflow: 'hidden',
-            borderRadius: theme => theme.spacing(borderRadius),
-            background: theme => theme.palette.grey[900],
+            width: 120,
+            height: 120,
+            border: '5px solid #fff',
+            marginBottom: 3
           }}
-        >
-          <Stack
-            flex="1 1 auto"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-              overflow: 'hidden',
-              borderRadius: theme => theme.spacing(borderRadius),
-              background: theme => theme.palette.background.paper,
-            }}
-          >
-            <Stack
-              flex="1 1 auto"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="h3">
-                Profile
-              </Typography>
-              <Typography variant="h6">
-                Email: {userEmail}
-              </Typography>
-              <LogoutButton></LogoutButton>
-            </Stack>
-            <BottomNavigation
-              showLabels
-              value={0}
-              sx={{
-                width: '100%',
-                position: 'sticky',
-                bottom: 0,
-              }}
-            >
-              <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon />}
-                href="/home"
-              />
-              <BottomNavigationAction
-                label="Timeline"
-                icon={<TimelineIcon />}
-                href="/tracking"
-              />
-              <BottomNavigationAction
-                label="Profile"
-                icon={<ProfileIcon />}
-                href="/profile"
-              />
-            </BottomNavigation>
-          </Stack>
-        </Paper>
-      </Container>
-    </Stack>
-  );
-};
+        />
 
-export default ProfilePage;
+        {/* User Info */}
+        <Typography variant="h5" sx={{ color: '#333', fontWeight: 'bold' }}>
+          Email:
+        </Typography>
+        <Typography variant="h6" sx={{ color: '#555', marginBottom: 3 }}>
+          {currentUser.email}
+        </Typography>
+
+        {/* Divider for style */}
+        <Divider sx={{ width: '80%', marginBottom: 3 }} />
+
+        {/* Fun About Section */}
+        <Typography variant="body1" sx={{ color: '#777', fontStyle: 'italic', textAlign: 'center' }}>
+          This still under development! ✨
+        </Typography>
+      </Paper>
+
+      {/* Outlet for nested routes */}
+      <Outlet />
+    </Stack>
+  )
+}
+
+export default Profile
