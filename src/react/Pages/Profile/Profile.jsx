@@ -1,29 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import {
-<<<<<<< HEAD
-  Stack,
-  Typography,
-  Container,
-  Paper,
-  BottomNavigation,
-  BottomNavigationAction,
-  Button,
-} from '@mui/material';
-import {
-  Home as HomeIcon,
-  Timeline as TimelineIcon,
-  Person4 as ProfileIcon,
-} from '@mui/icons-material';
-import AppLogo from '../../assets/favicon.svg';
-import { Link } from 'react-router-dom';
-import { auth } from '../../Hooks/firebase'; // Import your firebase auth
-=======
   Stack, Typography, Paper, Avatar, Divider, Button
 } from '@mui/material'
 import { getAuth } from 'firebase/auth'
 import SettingsIcon from '@mui/icons-material/Settings'
->>>>>>> main
 
 const Profile = () => {
   const [loading, setLoading] = useState(true)
