@@ -101,8 +101,12 @@ def predict_estimation(img):
 
     # Calculate the iron content
     iron_per_100g = 0.73  # mg of iron per 100 g of chicken breast
+    magnesium_per_100g = 25  # mg of magnesium per 100 g of chicken breast
+
     total_iron = (weight / 100) * iron_per_100g  # Total iron content in mg
+    total_magnesium = (weight / 100) * magnesium_per_100g  # Total magnesium in mg
+
 
     # Output the estimated weight and iron content
-    return weight, total_iron
+    return weight, total_iron, total_magnesium
 

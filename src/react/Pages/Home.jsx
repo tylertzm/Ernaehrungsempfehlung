@@ -243,6 +243,9 @@ const Home = () => {
                     <Typography variant="body2" sx={{ color: '#333' }}>
                       Iron (mg): {doc.estimation[1]?.toFixed(3)}
                     </Typography>
+                    <Typography variant="body2" sx={{ color: '#333' }}>
+                      Magnesium (mg): {doc.estimation[2]?.toFixed(3)}
+                    </Typography>
                     <IconButton
                       onClick={() => handleDeleteEstimation(doc.id, doc.imageUrl)}
                       sx={{ color: 'red', marginTop: 1 }}

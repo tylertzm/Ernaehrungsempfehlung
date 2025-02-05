@@ -94,15 +94,17 @@ const InfoPage = () => {
 
       {/* Always display the arrow */}
       <Box
-        sx={{
-          position: 'absolute',
-          animation: `${slideUp} 1.5s ease-in-out`
-        }}
-      >
-        <IconButton onClick={handleArrowClick}>
-          <ArrowDownward sx={{ fontSize: 40 }} />
-        </IconButton>
-      </Box>
+  sx={{
+    position: 'absolute',
+    bottom: '15px', // Versetzt den Pfeil 20px vom unteren Rand
+    animation: `${slideUp} 1.5s ease-in-out`
+  }}
+>
+  <IconButton onClick={handleArrowClick}>
+    <ArrowDownward sx={{ fontSize: 40 }} />
+  </IconButton>
+</Box>
+
     </Stack>
   )
 }
