@@ -4,7 +4,7 @@ import cv2
 import torch
 from depth_anything_v2.dpt import DepthAnythingV2
 
-def predict_estimation(img, known_distance_cm=30, threshold_level=10, min_valid_pixels=5000):
+def predict_estimation(img, known_distance_cm=15, threshold_level=10, min_valid_pixels=5000):
     """
     Estimates the weight, iron, and magnesium content of a chicken breast using depth estimation.
 
@@ -60,13 +60,10 @@ def predict_estimation(img, known_distance_cm=30, threshold_level=10, min_valid_
     refined_mask = cv2.morphologyEx(pink_mask, cv2.MORPH_CLOSE, kernel)
     refined_mask = cv2.morphologyEx(refined_mask, cv2.MORPH_OPEN, kernel)
 
-    # Extract segmented region
     segmented_image = cv2.bitwise_and(raw_img, raw_img, mask=refined_mask)
 
-    # Save segmented image
     cv2.imwrite("segmented_chicken.jpg", segmented_image)
 
-    # Set up device
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     depth_model = depth_model.to(device)
 
@@ -75,6 +72,13 @@ def predict_estimation(img, known_distance_cm=30, threshold_level=10, min_valid_
 
     # Normalize and scale depth
     depth_scaled = (depth / np.max(depth)) * known_distance_cm  
+
+    # Save depth map (Normalize to 8-bit range for saving as an image)
+    depth_normalized = cv2.normalize(depth_scaled, None, 0, 255, cv2.NORM_MINMAX)
+    depth_normalized = np.uint8(depth_normalized)  # Convert to 8-bit format for saving
+
+    # Save the depth map as an image
+    cv2.imwrite("depth_map.png", depth_normalized)
 
     # Convert depth map to volume estimation
     volume = np.sum(depth_scaled) * (1 / 5000)**2  
@@ -85,7 +89,7 @@ def predict_estimation(img, known_distance_cm=30, threshold_level=10, min_valid_
     weight = round(density * volume_cm3, 2)
 
     # Calculate iron content
-    iron_per_100g = 0.73  # mg of iron per 100 g of chicken breast
+    iron_per_100g = 0.73  
     total_iron = round((weight / 100) * iron_per_100g, 2)
 
     # Calculate magnesium content
