@@ -61,6 +61,7 @@ const Estimate = () => {
 
       // Here we assume that the result contains the estimated iron value (in mg)
       const estimatedIron = result?.iron || 0
+      const estimatedMg = result?.magnesium || 0
 
       // Save the data in Firestore
       await addDoc(collection(firestore, 'estimations'), {
@@ -68,7 +69,9 @@ const Estimate = () => {
         imageUrl: downloadURL,
         timestamp,
         estimation: result,
-        ironEstimation: estimatedIron
+        ironEstimation: estimatedIron,
+        magnesiumEstimation: estimatedMg
+
       })
     } catch (error) {
       setError(error.message)
@@ -207,6 +210,10 @@ const Estimate = () => {
 
             <Typography variant="h5" style={{ color: '#FF7043', fontWeight: '500' }}>
               Iron: {estimation[1].toFixed(2)}
+              mg
+            </Typography>
+            <Typography variant="h5" style={{ color: '#FF7043', fontWeight: '500' }}>
+              magnesium: {estimation[2].toFixed(2)}
               mg
             </Typography>
           </div>

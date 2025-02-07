@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Typography, IconButton, Box } from '@mui/material'
+import { Stack, Typography, IconButton, Box, Slider } from '@mui/material'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -15,6 +15,8 @@ const Home = () => {
   const [error, setError] = useState(null)
   const [showEstimations, setShowEstimations] = useState(false)
   const [totalIron, setTotalIron] = useState(0)
+  const [totalMg, setTotalMg] = useState(0)
+  const [sliderIndex, setSliderIndex] = useState(0) // Index to control slider position
 
   const auth = getAuth()
   const userEmail = auth.currentUser?.email
@@ -41,14 +43,16 @@ const Home = () => {
 
       const docsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        ...doc.data()
       }))
 
       setEstimations(docsData)
 
       const totalIronConsumed = docsData.reduce((acc, doc) => acc + (doc.estimation[1] || 0), 0)
-      setTotalIron(totalIronConsumed)
+      const totalMgConsumed = docsData.reduce((acc, doc) => acc + (doc.estimation[2] || 0), 0)
 
+      setTotalIron(totalIronConsumed)
+      setTotalMg(totalMgConsumed)
     } catch (err) {
       console.error('Error fetching estimations:', err)
       setError('Error fetching estimations.')
@@ -88,6 +92,11 @@ const Home = () => {
     }
   }
 
+  // Handle slider change
+  const handleSliderChange = (event, newValue) => {
+    setSliderIndex(newValue)
+  }
+
   return (
     <Box
       sx={{
@@ -99,30 +108,76 @@ const Home = () => {
         alignItems: 'center',
         padding: 0,
         backgroundColor: '#ffffff',
+        boxSizing: 'border-box'
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{
-          fontWeight: 'bold',
-          fontSize: '1.5rem',
-          color: '#003366',
-          WebkitBackgroundClip: 'text',
-          padding: '10px 20px',
-          borderRadius: '10px',
-          marginBottom: 2,
-        }}
-      >
-        {totalIron.toFixed(2)} mg of iron
-      </Typography>
+      {/* Gallery Slider for Iron and Magnesium */}
+      <Box sx={{ width: '80%', marginBottom: 4, position: 'relative', paddingTop: 2}}>
+        <Slider
+          value={sliderIndex}
+          onChange={handleSliderChange}
+          min={0}
+          max={1}
+          step={1}
+          valueLabelDisplay="auto"
+          valueLabelFormat={(value) => (value === 0 ? 'Iron' : 'Magnesium')}
+          sx={{
+            color: '#003366',
+            '& .MuiSlider-rail': {
+              backgroundColor: '#eeeeee',
+            },
+            '& .MuiSlider-thumb': {
+              backgroundColor: '#003366',
+            },
+          }}
+        />
 
+        {/* Displaying Total Iron or Magnesium based on slider index */}
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          {sliderIndex === 0 ? (
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '2rem',
+                color: '#003366',
+                background: 'linear-gradient(45deg, #003366, #000000)',
+                WebkitBackgroundClip: 'text',
+                padding: '10px 20px',
+                borderRadius: '10px',
+                textAlign: 'center',
+              }}
+            >
+              {totalIron.toFixed(2)} mg of iron
+            </Typography>
+          ) : (
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '2rem',
+                color: '#003366',
+                background: 'linear-gradient(45deg, #003366, #000000)',
+                WebkitBackgroundClip: 'text',
+                padding: '10px 20px',
+                borderRadius: '10px',
+                textAlign: 'center',
+              }}
+            >
+              {totalMg.toFixed(2)} mg of magnesium
+            </Typography>
+          )}
+        </Box>
+      </Box>
+
+      {/* Calendar Section */}
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           width: '100%',
-          height: 'calc(100% - 100px)', // Subtract the height of the total iron text
+          height: 'calc(100% - 100px)',
           overflow: 'hidden',
         }}
       >
@@ -134,6 +189,7 @@ const Home = () => {
               sx={{
                 backgroundColor: '#ffffff',
                 color: '#000000',
+                borderRadius: 2,
                 '& .MuiDayPickerDay-root': {
                   color: '#000000',
                 },
@@ -152,6 +208,7 @@ const Home = () => {
           </LocalizationProvider>
         )}
 
+        {/* View Estimations Button */}
         {!showEstimations && (
           <Box
             sx={{
@@ -178,11 +235,13 @@ const Home = () => {
                 justifyContent: 'center',
               }}
             >
-              View Estimations 📝 <ArrowForward sx={{ marginLeft: 1 }} />
+              View Estimations 📝
+              <ArrowForward sx={{ marginLeft: 1 }} />
             </Typography>
           </Box>
         )}
 
+        {/* Estimations */}
         {showEstimations && (
           <Box
             sx={{
@@ -199,8 +258,16 @@ const Home = () => {
             }}
             onClick={handleBackToCalendar}
           >
-            <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.25rem', marginBottom: 2 }}>
-              Estimations for {selectedDate.format('YYYY-MM-DD')}:
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: 'center',
+                fontWeight: 'bold',
+                fontSize: '1.25rem',
+                marginBottom: 2,
+              }}
+            >
+              back - {selectedDate.format('YYYY-MM-DD')}:
             </Typography>
             <Stack
               spacing={2}
@@ -221,7 +288,7 @@ const Home = () => {
                     sx={{
                       padding: 2,
                       borderRadius: 2,
-                      boxShadow: 2,
+                      boxShadow: 3,
                       backgroundColor: '#f3f3f3',
                       textAlign: 'center',
                     }}
@@ -243,6 +310,9 @@ const Home = () => {
                     <Typography variant="body2" sx={{ color: '#333' }}>
                       Iron (mg): {doc.estimation[1]?.toFixed(3)}
                     </Typography>
+                    <Typography variant="body2" sx={{ color: '#333' }}>
+                      Magnesium (mg): {doc.estimation[2]?.toFixed(3)}
+                    </Typography>
                     <IconButton
                       onClick={() => handleDeleteEstimation(doc.id, doc.imageUrl)}
                       sx={{ color: 'red', marginTop: 1 }}
@@ -253,18 +323,13 @@ const Home = () => {
                 ))
               )}
             </Stack>
-            <Typography
-              variant="body2"
-              sx={{ marginTop: 2, textAlign: 'center', color: 'gray', cursor: 'pointer' }}
-              onClick={handleBackToCalendar}
-            >
-              Click here to return to the calendar.
-            </Typography>
           </Box>
         )}
       </Box>
     </Box>
+    
   )
+  
 }
 
 export default Home
