@@ -63,7 +63,7 @@ const Estimate = () => {
       const estimatedIron = result?.iron || 0
 
       // Save the data in Firestore
-      await addDoc(collection(firestore, 'users'), {
+      await addDoc(collection(firestore, 'estimations'), {
         email: userEmail,
         imageUrl: downloadURL,
         timestamp,

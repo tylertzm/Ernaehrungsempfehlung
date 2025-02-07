@@ -31,7 +31,7 @@ const Home = () => {
       const endOfDay = date.endOf('day').toISOString()
 
       const q = query(
-        collection(db, 'users'),
+        collection(db, 'estimations'),
         where('email', '==', userEmail),
         where('timestamp', '>=', startOfDay),
         where('timestamp', '<=', endOfDay)
@@ -78,7 +78,7 @@ const Home = () => {
       const storage = getStorage()
       const imageRef = ref(storage, imageUrl)
       await deleteObject(imageRef)
-      const estimationDoc = doc(db, 'users', id)
+      const estimationDoc = doc(db, 'estimations', id)
       await deleteDoc(estimationDoc)
       setEstimations(estimations.filter((estimation) => estimation.id !== id))
       alert('Estimation and image deleted successfully!')
