@@ -7,15 +7,12 @@ CORS(app)  # This enables CORS for all routes
 
 @app.route('/upload', methods=['POST'])
 def get_estimation():
-    # Check if an image file was uploaded
     if 'image' not in request.files:
         return jsonify({'error': 'No image uploaded'}), 400
 
-    # Read the uploaded file
     file = request.files['image']
     try:
 
-        # Get estimation values using get_estimation (pass the image directly)
         estimation = predict_estimation(file)
         print(estimation)
 
